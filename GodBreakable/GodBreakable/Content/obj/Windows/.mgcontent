@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/ball.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck1.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick1.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/File.spritefont</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/racket.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File>Default.spritefont</File>
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
