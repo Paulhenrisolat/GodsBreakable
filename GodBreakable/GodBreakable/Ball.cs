@@ -10,7 +10,7 @@ namespace GodBreakable
 {
     public class Ball : Sprite
     {
-        public Ball(Texture2D pTexture, Rectangle pScreen) : base(pTexture, pScreen)
+        public Ball(Rectangle pScreen, Texture2D pTexture) : base(pScreen, pTexture)
         {
         }
 

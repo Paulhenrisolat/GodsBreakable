@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace GodBreakable
 {
@@ -13,6 +14,7 @@ namespace GodBreakable
     {
         Racket spRaquette;
         Ball spBall;
+        LifeBar bossLifebar;
         private bool ballStick;
         const int NbColonnes = 11;
         const int NbLines = 10;
@@ -20,22 +22,31 @@ namespace GodBreakable
         private List<Brick> lstBrick;
         SpriteFont fontMenu;
         private readonly Score Score = new Score();
+        private readonly ServiceSprite ServiceSprite = new ServiceSprite();
 
         public SceneGameplay(Game pGame) : base(pGame)
         {
+            IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
+
             //Contexte.life = 5;
             Rectangle Screen = ScreenSize;
             fontMenu = game.Content.Load<SpriteFont>("Default");
+
             //raquette
-            spRaquette = new Racket(game.Content.Load<Texture2D>("racket"), Screen);
+            spRaquette = new Racket(Screen, servSprite.NewSprite("racket", pGame));//game.Content.Load<Texture2D>("racket"));
             spRaquette.SetPosition(Screen.Width / 2 - spRaquette.Width / 2, Screen.Height - spRaquette.Height);
             //spRaquette.Speed = new Vector2(2,0);
 
             //ball
-            spBall = new Ball(game.Content.Load<Texture2D>("ball"), Screen);
+            spBall = new Ball(Screen, servSprite.NewSprite("ball", pGame));
             spBall.SetPosition(spRaquette.Position.X + spBall.Width / 2, spRaquette.Position.Y - spBall.Width);
             spBall.Speed = new Vector2(6, -6);
             ballStick = true;
+
+            //LifeBar
+            bossLifebar = new LifeBar(Screen, servSprite.NewSprite("barempty", pGame), servSprite.NewSprite("barfull", pGame));
+            bossLifebar.SetPosition(Screen.Width / 2 - bossLifebar.Width/2, Screen.Height / 2);
+
 
             Level = new int[,]
             {
@@ -59,7 +70,7 @@ namespace GodBreakable
                 {
                     if (Level[l, c] == 1)
                     {
-                        Brick myBrick = new Brick(texBrick, ScreenSize);
+                        Brick myBrick = new Brick(ScreenSize, texBrick);
                         myBrick.SetPosition(c * texBrick.Width, l * texBrick.Height);
                         lstBrick.Add(myBrick);
                     }
@@ -89,7 +100,26 @@ namespace GodBreakable
             }
             if (spRaquette.CollideBox.Intersects(spBall.NextPositionY()))
             {
+                if (spBall.Position.X <= spRaquette.Position.X + spRaquette.CollideBox.Width/2)
+                {
+                    Debug.WriteLine("Hit Left !");
+                }
+                if (spBall.Position.X >= spRaquette.Position.X + spRaquette.CollideBox.Width / 2)
+                {
+                    Debug.WriteLine("Hit Right !");
+                }
+                if (spBall.Position.X == spRaquette.Position.X + spRaquette.CollideBox.Width / 2)
+                {
+                    Debug.WriteLine("Hit Center !");
+                }
+
+                Debug.WriteLine("BallX: "+spBall.Position.X + " RacketX: "+spRaquette.Position.X + " RacketW: "+spRaquette.Width+ " TestRXW: "+(spRaquette.Position.X + spRaquette.Width));
                 spBall.InverseSpeedY();
+            }
+            if (spRaquette.CollideBox.Intersects(spBall.NextPositionX()))
+            {
+                //spBall.InverseSpeedX();
+                ballStick = true;
             }
             if (spBall.Position.Y >= ScreenSize.Height)
             {
@@ -139,6 +169,7 @@ namespace GodBreakable
 
             spRaquette.Draw(pBatch);
             spBall.Draw(pBatch);
+            bossLifebar.Draw(pBatch);
 
             IServiceScore servScore = ServiceLocator.GetService<IServiceScore>();
             if (servScore != null)

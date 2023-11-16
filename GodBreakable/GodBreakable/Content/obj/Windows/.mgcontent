@@ -5,6 +5,8 @@
   <Config />
   <SourceFiles>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/ball.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barempty.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barfull.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck1.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck2.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick1.png</File>
@@ -13,6 +15,8 @@
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/racket.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

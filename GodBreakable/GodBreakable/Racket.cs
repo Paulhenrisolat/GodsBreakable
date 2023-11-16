@@ -11,7 +11,7 @@ namespace GodBreakable
 {
     public class Racket : Sprite
     {
-        public Racket(Texture2D pTexture, Rectangle pScreen) : base(pTexture, pScreen)
+        public Racket(Rectangle pScreen, Texture2D pTexture) : base(pScreen, pTexture)
         {
 
         }

@@ -17,13 +17,23 @@ namespace GodBreakable
         public float center { get { return Position.X + Width / 2; } }
 
         private Texture2D Texture;
+        private Texture2D TextureSup;
         public int Height { get { return Texture.Height; } }
         public int Width { get { return Texture.Width; } }
 
-        public Sprite(Texture2D pTexture, Rectangle pScreen)
+        public bool doubleSprite { get; set; }
+
+        public Sprite(Rectangle pScreen, Texture2D pTexture)
         {
-            Texture = pTexture;
             Screen = pScreen;
+            Texture = pTexture;
+        }
+
+        public Sprite(Rectangle pScreen, Texture2D pTexture, Texture2D pTextureSup)
+        {
+            Screen = pScreen;
+            Texture = pTexture;
+            TextureSup = pTextureSup;
         }
 
         public void SetPosition(Vector2 pPosition)
@@ -67,6 +77,10 @@ namespace GodBreakable
         public virtual void Draw(SpriteBatch pBatch)
         {
             pBatch.Draw(Texture, Position, Color.White);
+            if (doubleSprite)
+            {
+                pBatch.Draw(TextureSup, Position, Color.White);
+            }
         }
     }
 }

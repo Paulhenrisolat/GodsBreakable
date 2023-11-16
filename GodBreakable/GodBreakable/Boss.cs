@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace GodBreakable
 {
-    internal class Boss
+    class Boss
     {
+        public bool secondPhase { get; set; }
+        private string name;
+
+        public Boss(string bossName, int bossHp) 
+        {
+            name = bossName;
+
+        }
+
+        public void LooseHp(int damage)
+        {
+
+        }
     }
 }

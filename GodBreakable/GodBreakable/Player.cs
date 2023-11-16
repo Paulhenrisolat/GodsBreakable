@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace GodBreakable
 {
-    internal class Player
+    class Player
     {
+        private int playerHp;
+        private int playerMaxHp;
     }
 }
