@@ -9,17 +9,21 @@ namespace GodBreakable
     class Boss
     {
         public bool secondPhase { get; set; }
-        private string name;
+        public string Name { get; set; }
+        public int Life { get; set; }
+        public int MaxLife { get; set; }
+        public bool IsDead { get { if (Life <= 0) { return true; } else { return false; } } set { } }
 
         public Boss(string bossName, int bossHp) 
         {
-            name = bossName;
-
+            Name = bossName;
+            Life = bossHp;
+            MaxLife = Life;
         }
 
         public void LooseHp(int damage)
         {
-
+            Life -= damage;
         }
     }
 }

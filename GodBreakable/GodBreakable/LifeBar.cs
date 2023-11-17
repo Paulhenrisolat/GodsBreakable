@@ -21,7 +21,6 @@ namespace GodBreakable
         public LifeBar(Rectangle pScreen, Texture2D pTexture, Texture2D pTextureSup) : base(pScreen, pTexture, pTextureSup)
         {
             //fontLife = Content.Load<SpriteFont>("Default");
-            this.doubleSprite = true;
         }
 
         public void LooseLife()

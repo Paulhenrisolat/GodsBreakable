@@ -13,6 +13,7 @@ namespace GodBreakable
         Scene MyActualScene;
         SceneMenu MySceneMenu;
         SceneGameplay MySceneGameplay;
+        SceneBoss MySceneBoss;
 
         public GodBreakable()
         {
@@ -40,6 +41,7 @@ namespace GodBreakable
             // TODO: use this.Content to load your game content here
             MySceneMenu = new SceneMenu(this);
             MySceneGameplay = new SceneGameplay(this);
+            MySceneBoss = new SceneBoss(this);
 
             MyActualScene = MySceneMenu;
         }
@@ -54,7 +56,11 @@ namespace GodBreakable
             //change scene
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-               MyActualScene = MySceneGameplay;
+                MyActualScene = MySceneGameplay;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                MyActualScene = MySceneBoss;
             }
 
             MyActualScene.Update();

@@ -34,6 +34,10 @@ namespace GodBreakable
             Screen = pScreen;
             Texture = pTexture;
             TextureSup = pTextureSup;
+            if(pTextureSup != null)
+            {
+                doubleSprite = true;
+            }
         }
 
         public void SetPosition(Vector2 pPosition)

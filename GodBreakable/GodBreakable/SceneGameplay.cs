@@ -14,6 +14,7 @@ namespace GodBreakable
     {
         Racket spRaquette;
         Ball spBall;
+        Boss newBoss;
         LifeBar bossLifebar;
         private bool ballStick;
         const int NbColonnes = 11;
@@ -21,12 +22,15 @@ namespace GodBreakable
         private int[,] Level;
         private List<Brick> lstBrick;
         SpriteFont fontMenu;
+        //Game gameActual;
         private readonly Score Score = new Score();
         private readonly ServiceSprite ServiceSprite = new ServiceSprite();
+        //private readonly ServiceFont ServiceFont = new ServiceFont();
 
         public SceneGameplay(Game pGame) : base(pGame)
         {
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
+            //gameActual = pGame;
 
             //Contexte.life = 5;
             Rectangle Screen = ScreenSize;
@@ -43,10 +47,12 @@ namespace GodBreakable
             spBall.Speed = new Vector2(6, -6);
             ballStick = true;
 
+            //Boss
+            newBoss = new Boss("AB", 100);
+
             //LifeBar
             bossLifebar = new LifeBar(Screen, servSprite.NewSprite("barempty", pGame), servSprite.NewSprite("barfull", pGame));
             bossLifebar.SetPosition(Screen.Width / 2 - bossLifebar.Width/2, Screen.Height / 2);
-
 
             Level = new int[,]
             {
@@ -176,6 +182,8 @@ namespace GodBreakable
             {
                 pBatch.DrawString(fontMenu, "Score : " + servScore.Get(), new Vector2(10, 30), Color.White);
             }
+            //IServiceFont servFont = ServiceLocator.GetService<IServiceFont>();
+            //servFont.Print("Test",gameActual, pBatch);
 
             pBatch.End();
         }
