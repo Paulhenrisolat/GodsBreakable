@@ -15,6 +15,9 @@ namespace GodBreakable
         public Rectangle ScreenSize { get; private set; }
         protected int CamShake;
         private Random rnd;
+        private readonly ServiceScreen ServiceScreen = new ServiceScreen();
+        private readonly ServiceSprite ServiceSprite = new ServiceSprite();
+        private readonly ServiceFont ServiceFont;
 
         public Scene(Game pGame)
         {
@@ -22,6 +25,8 @@ namespace GodBreakable
             ScreenSize = game.Window.ClientBounds;
             textBackground = game.Content.Load<Texture2D>("bck2");
             rnd = new Random();
+
+            ServiceFont = new ServiceFont(game);
         }
 
         public virtual void Update()

@@ -22,10 +22,7 @@ namespace GodBreakable
         private int[,] Level;
         private List<Brick> lstBrick;
         SpriteFont fontMenu;
-        //Game gameActual;
         private readonly Score Score = new Score();
-        private readonly ServiceSprite ServiceSprite = new ServiceSprite();
-        //private readonly ServiceFont ServiceFont = new ServiceFont();
 
         public SceneGameplay(Game pGame) : base(pGame)
         {
@@ -48,7 +45,7 @@ namespace GodBreakable
             ballStick = true;
 
             //Boss
-            newBoss = new Boss("AB", 100);
+            //newBoss = new Boss("AB", 100);
 
             //LifeBar
             bossLifebar = new LifeBar(Screen, servSprite.NewSprite("barempty", pGame), servSprite.NewSprite("barfull", pGame));
@@ -69,7 +66,7 @@ namespace GodBreakable
             };
 
             lstBrick = new List<Brick>();
-            Texture2D texBrick = game.Content.Load<Texture2D>("brick1");
+            Texture2D texBrick = servSprite.NewSprite("brick1", pGame);
             for (int l = 0; l < Level.GetLength(0); l++)
             {
                 for (int c = 0; c < Level.GetLength(1); c++)
@@ -159,6 +156,11 @@ namespace GodBreakable
                 {
                     lstBrick.Remove(myBrick);
                 }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Z))
+            {
+                //bossLifebar.lifeRect.Width -= 1;
             }
         }
 

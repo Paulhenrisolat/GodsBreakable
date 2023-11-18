@@ -15,6 +15,8 @@ namespace GodBreakable
         SceneGameplay MySceneGameplay;
         SceneBoss MySceneBoss;
 
+        //ServiceFont MyServiceFont;
+
         public GodBreakable()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -42,8 +44,11 @@ namespace GodBreakable
             MySceneMenu = new SceneMenu(this);
             MySceneGameplay = new SceneGameplay(this);
             MySceneBoss = new SceneBoss(this);
+            //MyServiceFont = new ServiceFont(this);
 
             MyActualScene = MySceneMenu;
+
+            //MyServiceFont.game = this;
         }
 
         protected override void Update(GameTime gameTime)

@@ -10,25 +10,24 @@ namespace GodBreakable
 {
     public interface IServiceFont
     {
-        void Print(string text,Game thisGame, SpriteBatch pBatch);
+        void Print(string text, Vector2 PosXY, SpriteBatch pBatch);
     }
 
     public class ServiceFont : IServiceFont
     {
-        //private SpriteBatch pBatch;
+        protected Game game;
         SpriteFont fontArial;
 
-        public ServiceFont() 
+        public ServiceFont(Game pGame)
         {
+            game = pGame;
             ServiceLocator.RegisterService<IServiceFont>(this);
         }
 
-        public void Print(string text, Game thisGame, SpriteBatch pBatch)
+        public void Print(string text, Vector2 PosXY, SpriteBatch pBatch)
         {
-            pBatch.Begin();
-            fontArial = thisGame.Content.Load<SpriteFont>("Default");
-            pBatch.DrawString(fontArial, text, new Vector2(10, 10), Color.White);
-            pBatch.End();
+            fontArial = game.Content.Load<SpriteFont>("Default");
+            pBatch.DrawString(fontArial, text, PosXY, Color.White);
         }
     }
 }

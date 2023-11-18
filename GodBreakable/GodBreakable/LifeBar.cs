@@ -17,10 +17,12 @@ namespace GodBreakable
         private int lifeValue;
         private int lifeMax;
         SpriteFont fontLife;
+        public Rectangle lifeRect { get; set; }
 
         public LifeBar(Rectangle pScreen, Texture2D pTexture, Texture2D pTextureSup) : base(pScreen, pTexture, pTextureSup)
         {
             //fontLife = Content.Load<SpriteFont>("Default");
+            lifeRect = new Rectangle(0, 0, pTextureSup.Width, pTextureSup.Height);
         }
 
         public void LooseLife()
