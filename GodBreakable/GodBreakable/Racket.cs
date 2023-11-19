@@ -11,10 +11,12 @@ namespace GodBreakable
 {
     public class Racket : Sprite
     {
+
         public Racket(Rectangle pScreen, Texture2D pTexture) : base(pScreen, pTexture)
         {
 
         }
+
         public override void Update()
         {
             if (Mouse.GetState().Y < Screen.Height && Mouse.GetState().Y > 0)

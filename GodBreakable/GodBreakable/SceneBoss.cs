@@ -15,16 +15,27 @@ namespace GodBreakable
         private List<Boss> lstBoss;
         private string SelectedBoss;
         private Rectangle GameScreen;
-        //SpriteFont Arial;
+        Racket newRacket;
+        Ball newBall;
 
         public SceneBoss(Game pGame) : base(pGame)
         {
             //Services
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
-            
+            IServiceScreen servScreen = ServiceLocator.GetService<IServiceScreen>();
+            GameScreen = servScreen.GetScreen(pGame);
+
+            //Racket
+            newRacket = new Racket(GameScreen, servSprite.NewSprite("racket", pGame));
+            newRacket.Position = new Vector2(GameScreen.Width/2 - newRacket.Width/2,GameScreen.Height - newRacket.Height);
+
+            //ball
+            newBall = new Ball(GameScreen, servSprite.NewSprite("ball", pGame));
+            newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height/2);
 
             //Boss
             lstBoss = new List<Boss>();
+
             newBoss = new Boss(pGame,"AB", 100, new int[,]
             {
                 {0,0,0,0,0,0,0,0,0,0,0 },
@@ -41,9 +52,6 @@ namespace GodBreakable
             
             
             lstBoss.Add(newBoss);
-
-            IServiceScreen servScreen = ServiceLocator.GetService<IServiceScreen>();
-            GameScreen = servScreen.GetScreen(pGame);
         }
 
         public override void Update()
@@ -61,8 +69,10 @@ namespace GodBreakable
         {
             base.Draw(pBatch);
             pBatch.Begin();
-
             IServiceFont servFont = ServiceLocator.GetService<IServiceFont>();
+
+            newRacket.Draw(pBatch);
+            newBall.Draw(pBatch);
 
             foreach (var boss in lstBoss)
             {
@@ -71,9 +81,9 @@ namespace GodBreakable
                     brick.Draw(pBatch);
                 }
 
-                servFont.Print("Boss: " + boss.Name, new Vector2(GameScreen.Width / 2, 10), pBatch);
-                servFont.Print("HP: " + boss.Life + " / " + boss.MaxLife, new Vector2(GameScreen.Width / 2, 30), pBatch);
-                servFont.Print("IsDead: " + boss.IsDead.ToString(), new Vector2(GameScreen.Width / 2, 50), pBatch);
+                servFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
+                servFont.Print("HP: " + boss.Life + " / " + boss.MaxLife, "", new Vector2(GameScreen.Width / 2, 30), pBatch);
+                servFont.Print("IsDead: " + boss.IsDead.ToString(), "", new Vector2(GameScreen.Width / 2, 50), pBatch);
             }
 
             //pBatch.DrawString(fontMenu, "Score : " + servScore.Get(), new Vector2(10, 30), Color.White);
