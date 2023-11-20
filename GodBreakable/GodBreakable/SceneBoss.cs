@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace GodBreakable
         private Rectangle GameScreen;
         Racket newRacket;
         Ball newBall;
+        bool ballStick;
 
         public SceneBoss(Game pGame) : base(pGame)
         {
@@ -32,6 +34,8 @@ namespace GodBreakable
             //ball
             newBall = new Ball(GameScreen, servSprite.NewSprite("ball", pGame));
             newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height/2);
+            newBall.Speed = new Vector2(6, -6);
+            ballStick = true;
 
             //Boss
             lstBoss = new List<Boss>();
@@ -56,11 +60,105 @@ namespace GodBreakable
 
         public override void Update()
         {
+            Input();
+            newRacket.Update();
+            BallManager();
+            BrickManager();
+        }
+
+        private void Input()
+        {
+            //IServiceInput servInput = ServiceLocator.GetService<IServiceInput>();
+            //if (servInput.GetInputPressed(Keys.E))
+
             if (Keyboard.GetState().IsKeyDown(Keys.E))
             {
                 foreach (var boss in lstBoss)
                 {
                     boss.LooseHp(3);
+                }
+            }
+        }
+
+        private void BallManager()
+        {
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                if (ballStick)
+                {
+                    ballStick = false;
+                }
+            }
+
+            if (ballStick)
+            {
+                newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height);
+            }
+            else
+            {
+                newBall.Update();
+            }
+            if (newRacket.CollideBox.Intersects(newBall.NextPositionY()))
+            {
+                if (newBall.Position.X <= newRacket.Position.X + newRacket.CollideBox.Width / 2)
+                {
+                    Debug.WriteLine("Hit Left !");
+                }
+                if (newBall.Position.X >= newRacket.Position.X + newRacket.CollideBox.Width / 2)
+                {
+                    Debug.WriteLine("Hit Right !");
+                }
+                if (newBall.Position.X == newRacket.Position.X + newRacket.CollideBox.Width / 2)
+                {
+                    Debug.WriteLine("Hit Center !");
+                }
+
+                Debug.WriteLine("BallX: " + newBall.Position.X + " RacketX: " + newRacket.Position.X + " RacketW: " + newRacket.Width + " TestRXW: " + (newRacket.Position.X + newRacket.Width));
+                newBall.InverseSpeedY();
+            }
+            if (newRacket.CollideBox.Intersects(newBall.NextPositionX()))
+            {
+                //spBall.InverseSpeedX();
+                ballStick = true;
+            }
+            if (newBall.Position.Y >= ScreenSize.Height)
+            {
+                ballStick = true;
+            }
+        }
+
+        private void BrickManager()
+        {
+            foreach (var boss in lstBoss)
+            {
+                for (int i = boss.ListBrick.Count - 1; i >= 0; i--)
+                {
+                    bool colision = false;
+                    Brick myBrick = boss.ListBrick[i];
+                    myBrick.Update();
+                    if (myBrick.BrickIsFalling == false)
+                    {
+                        if (myBrick.CollideBox.Intersects(newBall.NextPositionX()))
+                        {
+                            newBall.InverseSpeedX();
+                            colision = true;
+                        }
+                        if (myBrick.CollideBox.Intersects(newBall.NextPositionY()))
+                        {
+                            newBall.InverseSpeedY();
+                            colision = true;
+                        }
+                        if (colision)
+                        {
+                            boss.LooseHp(4);
+                            myBrick.Fall();
+                            CamShake = 30;
+                        }
+                    }
+                    if (myBrick.Position.Y >= ScreenSize.Height)
+                    {
+                        boss.ListBrick.Remove(myBrick);
+                    }
                 }
             }
         }

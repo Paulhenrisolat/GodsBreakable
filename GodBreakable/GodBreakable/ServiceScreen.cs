@@ -15,7 +15,6 @@ namespace GodBreakable
     public class ServiceScreen : IServiceScreen
     {
         Rectangle GameScreen;
-        //Game game;
 
         public ServiceScreen()
         {
