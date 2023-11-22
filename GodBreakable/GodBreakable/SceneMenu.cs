@@ -17,7 +17,7 @@ namespace GodBreakable
             fontMenu = game.Content.Load<SpriteFont>("Default");
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
 
         }

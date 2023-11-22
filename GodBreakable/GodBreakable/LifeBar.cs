@@ -11,32 +11,33 @@ namespace GodBreakable
 {
     public class LifeBar : Sprite
     {
-        private Texture2D textBarEmpty;
-        private Texture2D textBarFull;
+        private Texture2D textLifeBar;
+        private Texture2D textLifeBarEmpty;
         private string entityName;
-        private int lifeValue;
-        private int lifeMax;
-        SpriteFont fontLife;
-        public Rectangle lifeRect { get; set; }
+        private float lifeValue;
+        private float lifeMax;
 
-        public LifeBar(Rectangle pScreen, Texture2D pTexture, Texture2D pTextureSup) : base(pScreen, pTexture, pTextureSup)
+        public LifeBar(Rectangle pScreen, Texture2D pTexture, Game game) : base(pScreen, pTexture)
         {
-            //fontLife = Content.Load<SpriteFont>("Default");
-            lifeRect = new Rectangle(0, 0, pTextureSup.Width, pTextureSup.Height);
+            textLifeBarEmpty = game.Content.Load<Texture2D>("barempty");
         }
 
-        public void LooseLife()
+        public void LifeManager(float entityLife)
         {
-
-        }
-        public void GainLife()
-        {
-
+            lifeValue = entityLife / 100;
+            Scale = new Vector2(lifeValue, 0.50f);
         }
 
         public override void Update()
         {
             base.Update();
+        }
+
+        public override void Draw(SpriteBatch pBatch)
+        {
+            pBatch.Draw(textLifeBarEmpty, Position, null, Color.White, Rotation, Vector2.Zero, new Vector2(1f, 0.50f), SpriteEffects.None, 0f);
+            base.Draw(pBatch);
+            
         }
     }
 }

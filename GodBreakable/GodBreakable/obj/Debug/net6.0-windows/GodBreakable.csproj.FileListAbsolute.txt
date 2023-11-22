@@ -44,3 +44,7 @@ A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\brick2.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\barempty.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\barfull.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\brick3.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\brick4.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\fondAi1.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\blast.xnb

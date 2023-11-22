@@ -9,9 +9,13 @@
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barfull.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck1.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/blast.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick1.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick3.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick4.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/File.spritefont</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/fondAi1.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/racket.png</File>
   </SourceFiles>
   <DestFiles>
@@ -22,7 +26,11 @@
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File>Default.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

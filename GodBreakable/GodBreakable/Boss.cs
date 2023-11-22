@@ -11,14 +11,14 @@ namespace GodBreakable
     class Boss
     {
         public string Name { get; set; }
-        public int Life { get; set; }
-        public int MaxLife { get; private set; }
+        public float Life { get; set; }
+        public float MaxLife { get; private set; }
         public bool SecondPhase { get { if (Life <= MaxLife/2) { return true; } else { return false; } } set { } }
         public bool IsDead { get { if (Life <= 0) { return true; } else { return false; } } set { } }
         public int[,] Level { get; set; }
         public List<Brick> ListBrick { get; private set; }
 
-        public Boss(Game pGame, string bossName, int bossHp, int[,] bossLevel) 
+        public Boss(Game pGame, string bossName, float bossHp, int[,] bossLevel) 
         {
             //Boss Property
             Name = bossName;
@@ -30,29 +30,43 @@ namespace GodBreakable
             ListBrick = new List<Brick>();
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
             IServiceScreen servScreen = ServiceLocator.GetService<IServiceScreen>();
-            Texture2D texBrick = servSprite.NewSprite("brick1", pGame);
-            Texture2D texBrickB = servSprite.NewSprite("brick2", pGame);
+            Texture2D texBrickNormal = servSprite.NewSprite("brick1", pGame);
+            Texture2D texBrickHard = servSprite.NewSprite("brick2", pGame);
+            Texture2D texBrickWeak = servSprite.NewSprite("brick3", pGame);
+            Texture2D texBrickWeapon = servSprite.NewSprite("brick4", pGame);
             for (int l = 0; l < Level.GetLength(0); l++)
             {
                 for (int c = 0; c < Level.GetLength(1); c++)
                 {
                     if (Level[l, c] == 1)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(pGame), texBrick);
-                        myBrick.SetPosition(c * texBrick.Width, l * texBrick.Height);
+                        Brick myBrick = new Brick(servScreen.GetScreen(pGame), texBrickNormal, "Normal");
+                        myBrick.SetPosition(c * texBrickNormal.Width, l * texBrickNormal.Height);
                         ListBrick.Add(myBrick);
                     }
                     if (Level[l, c] == 2)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(pGame), texBrickB);
-                        myBrick.SetPosition(c * texBrickB.Width, l * texBrickB.Height);
+                        Brick myBrick = new Brick(servScreen.GetScreen(pGame), texBrickHard, "Hard");
+                        myBrick.SetPosition(c * texBrickHard.Width, l * texBrickHard.Height);
+                        ListBrick.Add(myBrick);
+                    }
+                    if (Level[l, c] == 3)
+                    {
+                        Brick myBrick = new Brick(servScreen.GetScreen(pGame), texBrickWeak, "Weak");
+                        myBrick.SetPosition(c * texBrickWeak.Width, l * texBrickWeak.Height);
+                        ListBrick.Add(myBrick);
+                    }
+                    if (Level[l, c] == 4)
+                    {
+                        Brick myBrick = new Brick(servScreen.GetScreen(pGame), texBrickWeapon, "Weapon");
+                        myBrick.SetPosition(c * texBrickWeapon.Width, l * texBrickWeapon.Height);
                         ListBrick.Add(myBrick);
                     }
                 }
             }
         }
 
-        public void LooseHp(int damage)
+        public void LoseHp(int damage)
         {
             Life -= damage;
         }

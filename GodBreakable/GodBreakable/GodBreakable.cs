@@ -15,8 +15,6 @@ namespace GodBreakable
         SceneGameplay MySceneGameplay;
         SceneBoss MySceneBoss;
 
-        //ServiceFont MyServiceFont;
-
         public GodBreakable()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -68,8 +66,8 @@ namespace GodBreakable
                 MyActualScene = MySceneBoss;
             }
 
-            MyActualScene.Update();
-
+            MyActualScene.Update(gameTime);
+            
             base.Update(gameTime);
         }
 

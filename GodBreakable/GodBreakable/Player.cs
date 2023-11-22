@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpDX.Direct3D9;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,19 @@ namespace GodBreakable
 {
     class Player
     {
-        private int playerHp;
-        private int playerMaxHp;
+        public int PlayerHp { get; set; }
+        public int PlayerMaxHp { get; set; }
+        public bool IsDead { get { if (PlayerHp <= 0) { return true; } else { return false; } } set { } }
+
+        public Player(int playerHp)
+        {
+            PlayerHp = playerHp;
+            PlayerMaxHp = PlayerHp;
+        }
+
+        public void LoseHp(int damage)
+        {
+            PlayerHp -= damage;
+        }
     }
 }

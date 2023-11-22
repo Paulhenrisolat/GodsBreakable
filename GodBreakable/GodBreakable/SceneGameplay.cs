@@ -48,7 +48,7 @@ namespace GodBreakable
             //newBoss = new Boss("AB", 100);
 
             //LifeBar
-            bossLifebar = new LifeBar(Screen, servSprite.NewSprite("barempty", pGame), servSprite.NewSprite("barfull", pGame));
+            bossLifebar = new LifeBar(Screen, servSprite.NewSprite("barfull", pGame), game);
             bossLifebar.SetPosition(Screen.Width / 2 - bossLifebar.Width/2, Screen.Height / 2);
 
             Level = new int[,]
@@ -73,7 +73,7 @@ namespace GodBreakable
                 {
                     if (Level[l, c] == 1)
                     {
-                        Brick myBrick = new Brick(ScreenSize, texBrick);
+                        Brick myBrick = new Brick(ScreenSize, texBrick, "Normal");
                         myBrick.SetPosition(c * texBrick.Width, l * texBrick.Height);
                         lstBrick.Add(myBrick);
                     }
@@ -81,7 +81,7 @@ namespace GodBreakable
             }
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             spRaquette.Update();
 

@@ -1,3 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barempty.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/barempty.xnb","TextureProcessor","Texture2DContent",1208,640085,0,1408059
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barfull.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/barfull.xnb","TextureProcessor","Texture2DContent",984,280085,0,0102835
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/blast.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/blast.xnb","TextureProcessor","Texture2DContent",636,8085,0,1078848

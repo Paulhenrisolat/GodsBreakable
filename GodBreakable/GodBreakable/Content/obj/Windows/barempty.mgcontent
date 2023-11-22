@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barempty.png</SourceFile>
-  <SourceTime>2023-11-14T13:14:08.7041653+01:00</SourceTime>
+  <SourceTime>2023-11-21T20:05:56.2550959+01:00</SourceTime>
   <DestFile>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/barempty.xnb</DestFile>
-  <DestTime>2023-11-16T02:08:34.4660971+01:00</DestTime>
+  <DestTime>2023-11-21T20:19:19.1656+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

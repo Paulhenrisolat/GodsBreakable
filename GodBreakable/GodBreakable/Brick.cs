@@ -12,9 +12,11 @@ namespace GodBreakable
     {
         private bool brickFalling;
         public bool BrickIsFalling { get { return brickFalling; } }
-        public Brick(Rectangle pScreen, Texture2D pTexture) : base(pScreen,pTexture)
+        public string BrickType;
+        public Brick(Rectangle pScreen, Texture2D pTexture, string brickType) : base(pScreen, pTexture)
         {
             brickFalling = false;
+            BrickType = brickType;
         }
         public override void Update()
         {
