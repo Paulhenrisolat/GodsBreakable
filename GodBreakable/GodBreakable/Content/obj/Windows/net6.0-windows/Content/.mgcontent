@@ -4,32 +4,40 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/ball.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barempty.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/barfull.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck1.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bck2.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/blast.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick1.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick2.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick3.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/brick4.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/File.spritefont</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/fondAi1.png</File>
-    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/racket.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/ball.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/barempty.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/barfull.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/bck1.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/bck2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/blast.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/blastv2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/brick1.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/brick2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/brick3.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/brick4.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/brick5.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/brick5v2.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/fondAi1.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/playerUI.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/racket.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File>Default.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

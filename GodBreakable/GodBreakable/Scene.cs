@@ -25,7 +25,7 @@ namespace GodBreakable
         {
             game = pGame;
             ScreenSize = game.Window.ClientBounds;
-            textBackground = game.Content.Load<Texture2D>("fondAi1");
+            textBackground = game.Content.Load<Texture2D>("img/fondAi1");
             rnd = new Random();
 
             ServiceFont = new ServiceFont(game);

@@ -19,7 +19,7 @@ namespace GodBreakable
 
         public LifeBar(Rectangle pScreen, Texture2D pTexture, Game game) : base(pScreen, pTexture)
         {
-            textLifeBarEmpty = game.Content.Load<Texture2D>("barempty");
+            textLifeBarEmpty = game.Content.Load<Texture2D>("img/barempty");
         }
 
         public void LifeManager(float entityLife)

@@ -21,10 +21,10 @@ namespace GodBreakable
         bool ballStick;
         Player player;
         Timer timer;
-        Timer timer2;
         LifeBar bossLifebar;
         private List<Shoot> lstShoot;
         Game ActualGame;
+        private Texture2D textPlayerUI;
 
         public SceneBoss(Game pGame) : base(pGame)
         {
@@ -38,13 +38,14 @@ namespace GodBreakable
 
             //Player
             player = new Player(100);
+            textPlayerUI = game.Content.Load<Texture2D>("img/playerUI");
 
             //Racket
-            newRacket = new Racket(GameScreen, servSprite.NewSprite("racket", pGame));
-            newRacket.Position = new Vector2(GameScreen.Width/2 - newRacket.Width/2,GameScreen.Height - newRacket.Height - 10);
+            newRacket = new Racket(GameScreen, servSprite.NewSprite("img/racket", pGame));
+            newRacket.Position = new Vector2(GameScreen.Width/2 - newRacket.Width/2,GameScreen.Height - newRacket.Height - textPlayerUI.Height / 5);
 
             //ball
-            newBall = new Ball(GameScreen, servSprite.NewSprite("ball", pGame));
+            newBall = new Ball(GameScreen, servSprite.NewSprite("img/ball", pGame));
             newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height/2);
             newBall.Speed = new Vector2(6, -6);
             ballStick = true;
@@ -53,7 +54,7 @@ namespace GodBreakable
             timer = new Timer(10);
 
             //LifeBar
-            bossLifebar = new LifeBar(GameScreen, servSprite.NewSprite("barfull", pGame),pGame);
+            bossLifebar = new LifeBar(GameScreen, servSprite.NewSprite("img/barfull", pGame),pGame);
             bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2,10);
 
             //Shoot
@@ -62,19 +63,21 @@ namespace GodBreakable
             //Boss
             lstBoss = new List<Boss>();
 
-            newBoss = new Boss(pGame,"AB", 100f, new int[,]
+            newBoss = new Boss(pGame,"AB","img/brick5v2", 100f, new int[,]
             {
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
-                {0,1,1,1,1,1,1,1,1,1,0 },
-                {0,1,1,1,1,0,1,1,1,1,0 },
+                {0,0,1,1,1,1,1,1,1,0,0 },
+                {0,1,1,1,2,4,2,1,1,1,0 },
                 {0,1,1,1,0,0,0,1,1,1,0 },
-                {4,1,1,0,0,3,0,0,1,1,4 },
+                {4,2,2,0,0,5,0,0,2,2,4 },
                 {0,1,1,1,0,0,0,1,1,1,0 },
                 {0,1,1,1,1,0,1,1,1,1,0 },
                 {0,1,3,1,1,1,1,1,3,1,0 },
-                {0,1,1,1,2,2,2,1,1,1,0 }
+                {0,1,1,1,2,2,2,1,1,1,0 },
+                {0,1,1,1,2,1,2,1,1,1,0 },
+                {0,0,1,1,2,1,2,1,1,0,0 },
             });
             
             
@@ -144,7 +147,7 @@ namespace GodBreakable
                 //spBall.InverseSpeedX();
                 ballStick = true;
             }
-            if (newBall.Position.Y >= ScreenSize.Height)
+            if (newBall.Position.Y >= ScreenSize.Height - textPlayerUI.Height / 5 - newBall.Height)
             {
                 ballStick = true;
             }
@@ -163,7 +166,7 @@ namespace GodBreakable
                     //myBrick.Speed = new Vector2(1f, 0);
                     if ( myBrick.BrickType=="Weapon" && timer.CanDo == true)
                     {
-                        Shoot("blast", new Vector2(myBrick.Position.X + myBrick.Width/2, myBrick.Position.Y), new Vector2(0f,2f), 10);
+                        Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width/2, myBrick.Position.Y), new Vector2(0f,2f), 10);
                     }
 
                     if (myBrick.BrickIsFalling == false)
@@ -192,11 +195,24 @@ namespace GodBreakable
                             {
                                 boss.LoseHp(1);
                             }
-                            myBrick.Fall();
-                            CamShake = 30;
+                            if (myBrick.BrickType == "Core")
+                            {
+                                boss.LoseHp(8);
+                                CamShake = 100;
+                            }
+
+                            if (myBrick.BrickType != "Core")
+                            {
+                                myBrick.Fall();
+                                CamShake = 30;
+                            }
                         }
                     }
-                    if (myBrick.Position.Y >= ScreenSize.Height)
+                    if (myBrick.BrickType == "Core" && boss.IsDead)
+                    {
+                        myBrick.Fall();
+                    }
+                    if (myBrick.Position.Y >= ScreenSize.Height - textPlayerUI.Height / 5)
                     {
                         boss.ListBrick.Remove(myBrick);
                     }
@@ -217,7 +233,7 @@ namespace GodBreakable
             for (int i = lstShoot.Count - 1; i >= 0; i--)
             {
                 Shoot theProjectile = lstShoot[i];
-                if (theProjectile.Position.Y >= ScreenSize.Height)
+                if (theProjectile.Position.Y >= ScreenSize.Height - textPlayerUI.Height / 5 - theProjectile.Height)
                 {
                     lstShoot.Remove(theProjectile);
                     player.LoseHp(theProjectile.Damage);
@@ -242,7 +258,9 @@ namespace GodBreakable
             IServiceFont servFont = ServiceLocator.GetService<IServiceFont>();
             base.Draw(pBatch);
             pBatch.Begin();
-            
+
+            pBatch.Draw(textPlayerUI, new Vector2(0, GameScreen.Height - textPlayerUI.Height/5), Color.White);
+
             bossLifebar.Draw(pBatch);
             newRacket.Draw(pBatch);
             newBall.Draw(pBatch);
@@ -252,18 +270,21 @@ namespace GodBreakable
                 foreach (var brick in boss.ListBrick)
                 {
                     brick.Draw(pBatch);
+                    if (brick.BrickType == "Weapon")
+                    {
+                        servFont.Print(Math.Floor(timer.Time).ToString(), "", new Vector2(brick.Position.X + brick.Width/ 2, brick.Position.Y - brick.Height), pBatch);
+                    }
                 }
                 servFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
                 servFont.Print(boss.Life + " / " + boss.MaxLife +" %"+boss.Life/100, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width/2, bossLifebar.Position.Y +20), pBatch);
-                servFont.Print("IsDead: " + boss.IsDead.ToString(), "", new Vector2(GameScreen.Width / 2, 50), pBatch);
-                servFont.Print("Timer: " + timer.Time + "cando:" + timer.CanDo, "", new Vector2(GameScreen.Width / 2, 70), pBatch);
+                //servFont.Print("IsDead: " + boss.IsDead.ToString(), "", new Vector2(GameScreen.Width / 2, 50), pBatch);
             }
 
             foreach (var projectile in lstShoot)
             {
                 projectile.Draw(pBatch);
             }
-
+            
             servFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
 
             pBatch.End();
