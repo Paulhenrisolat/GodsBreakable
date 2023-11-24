@@ -209,6 +209,7 @@ namespace GodBreakable
                         }
                         if (colision)
                         {
+                            servSound.PlaySound("bump");
                             if (myBrick.BrickType == "Weak")
                             {
                                 boss.LoseHp(4);

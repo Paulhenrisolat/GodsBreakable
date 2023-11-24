@@ -14,36 +14,44 @@ namespace GodBreakable
         void PlayMusic(string soundName);
         void StopMusic();
         string MusicPlaying();
+        void PlaySound(string soundName);
     }
 
     public class ServiceSound : IServiceSound
     {
+        public List<Music> musics;
         public List<Sound> sounds;
         protected Game game;
-        private Sound songPlaying;
+        private Music songPlaying;
 
         public ServiceSound(Game pGame)
         {
             game = pGame;
-            //Sounds
+            //Musics
+            musics = new List<Music>
+            {
+                new Music("OpenYourEyes-part1", game.Content.Load<Song>("music/OpenYourEyes-part1")),
+                new Music("OpenYourEyes-part2", game.Content.Load<Song>("music/OpenYourEyes-part2"))
+            };
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
+
+            //Sounds
+            sounds = new List<Sound> 
+            {
+                new Sound("bump", game.Content.Load<SoundEffect>("sound/bump"))
+            };
             ServiceLocator.RegisterService<IServiceSound>(this);
         }
 
-        public void PlayMusic(string soundName)
+        public void PlayMusic(string musicName)
         {
             StopMusic();
 
-            sounds = new List<Sound>
+            for (int i = musics.Count - 1; i >= 0; i--)
             {
-                new Sound("OpenYourEyes-part1", game.Content.Load<Song>("music/OpenYourEyes-part1")),
-                new Sound("OpenYourEyes-part2", game.Content.Load<Song>("music/OpenYourEyes-part2"))
-            };
-
-            for (int i = sounds.Count - 1; i >= 0; i--)
-            {
-                Sound sound = sounds[i];
-                if (sound.Name == soundName)
+                Music sound = musics[i];
+                if (sound.Name == musicName)
                 {
                     songPlaying = sound;
                     MediaPlayer.Play(songPlaying.Audio);
@@ -67,6 +75,18 @@ namespace GodBreakable
                 return "None";
             }
             
+        }
+
+        public void PlaySound(string soundName)
+        {
+            for (int i = sounds.Count - 1; i >= 0; i--)
+            {
+                Sound sound = sounds[i];
+                if (sound.Name == soundName)
+                {
+                    sound.Audio.Play();
+                }
+            }
         }
     }
 }
