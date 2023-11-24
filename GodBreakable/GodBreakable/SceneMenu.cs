@@ -12,15 +12,13 @@ namespace GodBreakable
     public class SceneMenu : Scene
     {
         SpriteFont fontMenu;
-        Song MySong;
         public SceneMenu(Game pGame) : base(pGame)
         {
             fontMenu = game.Content.Load<SpriteFont>("Default");
-            base.SceneSong = game.Content.Load<Song>("music/OpenYourEyes-part1");
-            //MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Volume = 0.2f; //1ismax
-            //MediaPlayer.Play(MySong);
             base.textBackground = game.Content.Load<Texture2D>("img/bgTitle");
+
+            IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
+            servSound.PlayMusic("OpenYourEyes-part1");
         }
 
         public override void Update(GameTime gameTime)

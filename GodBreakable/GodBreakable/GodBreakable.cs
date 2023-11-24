@@ -65,6 +65,10 @@ namespace GodBreakable
             {
                 MyActualScene = MySceneBoss;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                MyActualScene = MySceneMenu;
+            }
 
             MyActualScene.Update(gameTime);
             

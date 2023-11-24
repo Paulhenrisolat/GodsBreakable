@@ -13,15 +13,17 @@ namespace GodBreakable
     {
         protected Game game;
         public Texture2D textBackground {  get; set; }
-        public Song SceneSong { get; set; }
+        public string SceneSong { get; set; }
+        public bool CanChangeMusic {  get; set; }
         public Rectangle ScreenSize { get; private set; }
         protected int CamShake;
         private Random rnd;
         //Declare Services
-        private readonly ServiceScreen ServiceScreen = new ServiceScreen();
-        private readonly ServiceSprite ServiceSprite = new ServiceSprite();
+        private readonly ServiceScreen ServiceScreen;
+        private readonly ServiceSprite ServiceSprite;
         private readonly ServiceInput ServiceInput = new ServiceInput();
         private readonly ServiceFont ServiceFont;
+        public readonly ServiceSound ServiceSound;
 
         public Scene(Game pGame)
         {
@@ -32,10 +34,9 @@ namespace GodBreakable
             rnd = new Random();
 
             ServiceFont = new ServiceFont(game);
-            SceneSong = game.Content.Load<Song>("music/OpenYourEyes-part1");
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.2f;
-            MediaPlayer.Play(SceneSong);
+            ServiceSound = new ServiceSound(game);
+            ServiceScreen = new ServiceScreen(game);
+            ServiceSprite = new ServiceSprite(game);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -56,6 +57,7 @@ namespace GodBreakable
             }
 
             pBatch.Draw(textBackground, new Vector2(ScreenSize.Width/2-textBackground.Width/2, 0), Color.White);
+            ServiceFont.Print("Music: " + ServiceSound.MusicPlaying(),"", new Vector2(20, 50), pBatch);
             pBatch.End();
         }
     }

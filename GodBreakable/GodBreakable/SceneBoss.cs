@@ -36,18 +36,23 @@ namespace GodBreakable
             //Services
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
             IServiceScreen servScreen = ServiceLocator.GetService<IServiceScreen>();
-            GameScreen = servScreen.GetScreen(pGame);
+            IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
+
+            //Music
+            //servSound.PlayMusic("OpenYourEyes-part2");
+
+            GameScreen = servScreen.GetScreen();
 
             //Player
             player = new Player(100);
             textPlayerUI = game.Content.Load<Texture2D>("img/playerUI");
 
             //Racket
-            newRacket = new Racket(GameScreen, servSprite.NewSprite("img/racket", pGame));
+            newRacket = new Racket(GameScreen, servSprite.NewSprite("img/racket"));
             newRacket.Position = new Vector2(GameScreen.Width/2 - newRacket.Width/2,GameScreen.Height - newRacket.Height - textPlayerUI.Height / 5);
 
             //ball
-            newBall = new Ball(GameScreen, servSprite.NewSprite("img/ball", pGame));
+            newBall = new Ball(GameScreen, servSprite.NewSprite("img/ball"));
             newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height/2);
             newBall.Speed = new Vector2(6, -6);
             ballStick = true;
@@ -56,7 +61,7 @@ namespace GodBreakable
             timer = new Timer(10);
 
             //LifeBar
-            bossLifebar = new LifeBar(GameScreen, servSprite.NewSprite("img/barfull", pGame),pGame);
+            bossLifebar = new LifeBar(GameScreen, servSprite.NewSprite("img/barfull"),pGame);
             bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2,10);
 
             //Shoot
@@ -81,14 +86,13 @@ namespace GodBreakable
                 {0,1,1,1,2,1,2,1,1,1,0 },
                 {0,0,1,1,2,1,2,1,1,0,0 },
             });
-            
-            
+
+            //servSound.PlayMusic("OpenYourEyes-part2");
             lstBoss.Add(newBoss);
         }
 
         public override void Update(GameTime gameTime)
         {
-            //base.SceneSong = ActualGame.Content.Load<Song>("music/OpenYourEyes-part2");
             timer.Update(gameTime);
             Input();
             newRacket.Update();
@@ -169,11 +173,19 @@ namespace GodBreakable
 
         private void BrickManager()
         {
+            IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
+
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
             foreach (var boss in lstBoss)
             {
                 for (int i = boss.ListBrick.Count - 1; i >= 0; i--)
                 {
+                    if(boss.SecondPhase == true && boss.CanChangeMusic == true)
+                    {
+                        servSound.StopMusic();
+                        servSound.PlayMusic("OpenYourEyes-part2");
+                        boss.CanChangeMusic = false;
+                    }
                     bool colision = false;
                     Brick myBrick = boss.ListBrick[i];
                     myBrick.Update();
@@ -238,7 +250,7 @@ namespace GodBreakable
         {
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
 
-            Shoot newProjectile = new Shoot(GameScreen, servSprite.NewSprite(TextName, ActualGame), Position, Speed, Damage);
+            Shoot newProjectile = new Shoot(GameScreen, servSprite.NewSprite(TextName), Position, Speed, Damage);
             lstShoot.Add(newProjectile);
         }
 

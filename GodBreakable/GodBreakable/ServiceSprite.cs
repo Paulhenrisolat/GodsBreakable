@@ -10,20 +10,22 @@ namespace GodBreakable
 {
     public interface IServiceSprite
     {
-        Texture2D NewSprite(string spriteName, Game thisGame);
+        Texture2D NewSprite(string spriteName);
     }
 
     public class ServiceSprite : IServiceSprite
     {
+        protected Game game;
 
-        public ServiceSprite()
+        public ServiceSprite(Game pGame)
         {
+            game = pGame;
             ServiceLocator.RegisterService<IServiceSprite>(this);
         }
 
-        public Texture2D NewSprite(string spriteName, Game thisGame)
+        public Texture2D NewSprite(string spriteName)
         {
-            return thisGame.Content.Load<Texture2D>(spriteName);
+            return game.Content.Load<Texture2D>(spriteName);
         }
     }
 }

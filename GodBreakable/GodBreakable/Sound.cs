@@ -12,5 +12,11 @@ namespace GodBreakable
     {
         public string Name { get; set; }
         public Song Audio {  get; set; }
+
+        public Sound(string name, Song audio)
+        {
+            Name = name;
+            Audio = audio;
+        }
     }
 }

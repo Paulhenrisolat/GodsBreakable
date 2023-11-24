@@ -9,21 +9,23 @@ namespace GodBreakable
 {
     public interface IServiceScreen
     {
-        Rectangle GetScreen(Game pGame);
+        Rectangle GetScreen();
     }
 
     public class ServiceScreen : IServiceScreen
     {
         Rectangle GameScreen;
+        protected Game game;
 
-        public ServiceScreen()
+        public ServiceScreen(Game pGame)
         {
+            game = pGame;
             ServiceLocator.RegisterService<IServiceScreen>(this);
         }
 
-        public Rectangle GetScreen(Game pGame)
+        public Rectangle GetScreen()
         {
-            GameScreen = pGame.Window.ClientBounds;
+            GameScreen = game.Window.ClientBounds;
             return GameScreen;
         }
     }
