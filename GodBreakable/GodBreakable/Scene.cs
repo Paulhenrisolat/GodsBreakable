@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Media;
 
 namespace GodBreakable
 {
     public class Scene
     {
-        private Texture2D textBackground;
         protected Game game;
+        public Texture2D textBackground {  get; set; }
+        public Song SceneSong { get; set; }
         public Rectangle ScreenSize { get; private set; }
         protected int CamShake;
         private Random rnd;
@@ -26,9 +28,14 @@ namespace GodBreakable
             game = pGame;
             ScreenSize = game.Window.ClientBounds;
             textBackground = game.Content.Load<Texture2D>("img/fondAi1");
+
             rnd = new Random();
 
             ServiceFont = new ServiceFont(game);
+            SceneSong = game.Content.Load<Song>("music/OpenYourEyes-part1");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.2f;
+            MediaPlayer.Play(SceneSong);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -48,7 +55,7 @@ namespace GodBreakable
                 pBatch.Begin();
             }
 
-            pBatch.Draw(textBackground, new Vector2(0, 0), Color.White);
+            pBatch.Draw(textBackground, new Vector2(ScreenSize.Width/2-textBackground.Width/2, 0), Color.White);
             pBatch.End();
         }
     }

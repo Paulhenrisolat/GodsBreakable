@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/music/OpenYourEyes-part1.mp3</SourceFile>
+  <SourceTime>2023-11-23T15:13:44.6317673+01:00</SourceTime>
+  <DestFile>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/Content/music/OpenYourEyes-part1.xnb</DestFile>
+  <DestTime>2023-11-23T16:17:26.2418185+01:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/Content/music/OpenYourEyes-part1.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

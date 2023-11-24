@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,6 +29,7 @@ namespace GodBreakable
 
         public SceneBoss(Game pGame) : base(pGame)
         {
+            //base.SceneSong = game.Content.Load<Song>("music/OpenYourEyes-part2");
             //Game
             ActualGame = pGame;
 
@@ -86,6 +88,7 @@ namespace GodBreakable
 
         public override void Update(GameTime gameTime)
         {
+            //base.SceneSong = ActualGame.Content.Load<Song>("music/OpenYourEyes-part2");
             timer.Update(gameTime);
             Input();
             newRacket.Update();
@@ -120,9 +123,20 @@ namespace GodBreakable
             {
                 newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height);
             }
-            else
+            if (ballStick == false) 
             {
                 newBall.Update();
+                //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                //{
+                //    if (ballStick)
+                //    {
+                //        ballStick = false;
+                //    }
+                //}
+            }
+            else
+            {
+                
             }
             if (newRacket.CollideBox.Intersects(newBall.NextPositionY()))
             {
@@ -166,7 +180,7 @@ namespace GodBreakable
                     //myBrick.Speed = new Vector2(1f, 0);
                     if ( myBrick.BrickType=="Weapon" && timer.CanDo == true)
                     {
-                        Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width/2, myBrick.Position.Y), new Vector2(0f,2f), 10);
+                        Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width/2, myBrick.Position.Y), new Vector2(0f,5f), 10);
                     }
 
                     if (myBrick.BrickIsFalling == false)

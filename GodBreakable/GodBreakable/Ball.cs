@@ -10,8 +10,11 @@ namespace GodBreakable
 {
     public class Ball : Sprite
     {
+        public bool isPaused {  get; set; }
+
         public Ball(Rectangle pScreen, Texture2D pTexture) : base(pScreen, pTexture)
         {
+            isPaused = false;
         }
 
         public override void Update()

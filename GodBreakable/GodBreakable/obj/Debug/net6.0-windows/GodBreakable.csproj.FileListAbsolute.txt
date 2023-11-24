@@ -52,3 +52,9 @@ A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\brick5.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\brick5v2.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\blastv2.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\music\OpenYourEyes-part1.wma
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\music\OpenYourEyes-part1.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\music\OpenYourEyes-part2.wma
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\music\OpenYourEyes-part2.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\sound\bump.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\bgTitle.xnb
