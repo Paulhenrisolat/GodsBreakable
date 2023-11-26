@@ -57,7 +57,7 @@ namespace GodBreakable
             }
 
             pBatch.Draw(textBackground, new Vector2(ScreenSize.Width/2-textBackground.Width/2, 0), Color.White);
-            ServiceFont.Print("Music: " + ServiceSound.MusicPlaying(),"", new Vector2(20, 50), pBatch);
+            ServiceFont.Print("Music: " + ServiceSound.MusicPlaying(),"", new Vector2(20, 70), pBatch);
             pBatch.End();
         }
     }

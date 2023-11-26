@@ -45,31 +45,31 @@ namespace GodBreakable
                 {
                     if (Level[l, c] == 1)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickNormal, "Normal");
+                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickNormal, "Normal",1);
                         myBrick.SetPosition(c * texBrickNormal.Width, l * texBrickNormal.Height);
                         ListBrick.Add(myBrick);
                     }
                     if (Level[l, c] == 2)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickHard, "Hard");
+                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickHard, "Hard", 2);
                         myBrick.SetPosition(c * texBrickHard.Width, l * texBrickHard.Height);
                         ListBrick.Add(myBrick);
                     }
                     if (Level[l, c] == 3)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickWeak, "Weak");
+                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickWeak, "Weak", 1);
                         myBrick.SetPosition(c * texBrickWeak.Width, l * texBrickWeak.Height);
                         ListBrick.Add(myBrick);
                     }
                     if (Level[l, c] == 4)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickWeapon, "Weapon");
+                        Brick myBrick = new Brick(servScreen.GetScreen(), texBrickWeapon, "Weapon",2);
                         myBrick.SetPosition(c * texBrickWeapon.Width, l * texBrickWeapon.Height);
                         ListBrick.Add(myBrick);
                     }
                     if (Level[l, c] == 5)
                     {
-                        Brick myBrick = new Brick(servScreen.GetScreen(), texBricCore, "Core");
+                        Brick myBrick = new Brick(servScreen.GetScreen(), texBricCore, "Core",1000);
                         myBrick.SetPosition(c * texBricCore.Width, l * texBricCore.Height);
                         ListBrick.Add(myBrick);
                     }

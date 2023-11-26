@@ -13,10 +13,12 @@ namespace GodBreakable
         private bool brickFalling;
         public bool BrickIsFalling { get { return brickFalling; } }
         public string BrickType;
-        public Brick(Rectangle pScreen, Texture2D pTexture, string brickType) : base(pScreen, pTexture)
+        public int BrickHP {  get; set; }
+        public Brick(Rectangle pScreen, Texture2D pTexture, string brickType, int brickHP) : base(pScreen, pTexture)
         {
             brickFalling = false;
             BrickType = brickType;
+            BrickHP = brickHP;
         }
         public override void Update()
         {
@@ -36,6 +38,11 @@ namespace GodBreakable
             {
                 servScore.Add(10);
             }
+        }
+
+        public void TakeHit()
+        {
+            BrickHP -= 1;
         }
     }
 }

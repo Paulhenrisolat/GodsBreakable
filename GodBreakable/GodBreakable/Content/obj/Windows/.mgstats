@@ -1,2 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/bgTitle.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/bgTitle.xnb","TextureProcessor","Texture2DContent",2014310,6291541,0,3237708
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/btnbg.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/btnbg.xnb","TextureProcessor","Texture2DContent",287,48085,0,1295711
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/brickxplode.wav","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/sound/brickxplode.xnb","SoundEffectProcessor","SoundEffectContent",47686,41647,0,2539021
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/lightning.wav","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/sound/lightning.xnb","SoundEffectProcessor","SoundEffectContent",107302,73399,0,2222021

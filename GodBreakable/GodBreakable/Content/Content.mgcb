@@ -188,6 +188,18 @@
 /processorParam:TextureFormat=Color
 /build:img/brick5v2.png
 
+#begin img/btnbg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/btnbg.png
+
 #begin img/fondAi1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -236,9 +248,21 @@
 /processorParam:Quality=Best
 /build:music/OpenYourEyes-part2.mp3
 
+#begin sound/brickxplode.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/brickxplode.wav
+
 #begin sound/bump.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound/bump.wav
+
+#begin sound/lightning.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/lightning.wav
 

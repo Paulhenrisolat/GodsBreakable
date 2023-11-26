@@ -26,10 +26,10 @@ namespace GodBreakable
         private List<Shoot> lstShoot;
         Game ActualGame;
         private Texture2D textPlayerUI;
+        Button newBtn;
 
         public SceneBoss(Game pGame) : base(pGame)
         {
-            //base.SceneSong = game.Content.Load<Song>("music/OpenYourEyes-part2");
             //Game
             ActualGame = pGame;
 
@@ -67,6 +67,10 @@ namespace GodBreakable
             //Shoot
             lstShoot = new List<Shoot>();
 
+            //btn
+            newBtn = new Button(GameScreen, servSprite.NewSprite("img/btnbg"),"MainMenu");
+            newBtn.SetPosition(GameScreen.Width / 2, GameScreen.Height / 2);
+
             //Boss
             lstBoss = new List<Boss>();
 
@@ -87,7 +91,6 @@ namespace GodBreakable
                 {0,0,1,1,2,1,2,1,1,0,0 },
             });
 
-            //servSound.PlayMusic("OpenYourEyes-part2");
             lstBoss.Add(newBoss);
         }
 
@@ -96,6 +99,7 @@ namespace GodBreakable
             timer.Update(gameTime);
             Input();
             newRacket.Update();
+            newBtn.Update();
             BallManager();
             BrickManager();
             bossLifebar.LifeManager(newBoss.Life);
@@ -193,6 +197,7 @@ namespace GodBreakable
                     if ( myBrick.BrickType=="Weapon" && timer.CanDo == true)
                     {
                         Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width/2, myBrick.Position.Y), new Vector2(0f,5f), 10);
+                        servSound.PlaySound("lightning");
                     }
 
                     if (myBrick.BrickIsFalling == false)
@@ -210,6 +215,13 @@ namespace GodBreakable
                         if (colision)
                         {
                             servSound.PlaySound("bump");
+                            myBrick.TakeHit();
+                            if(myBrick.BrickHP<= 0 && myBrick.BrickType != "Core")
+                            {
+                                //myBrick.Fall();
+                                servSound.PlaySound("brickxplode");
+                                boss.ListBrick.Remove(myBrick);
+                            }
                             if (myBrick.BrickType == "Weak")
                             {
                                 boss.LoseHp(4);
@@ -226,12 +238,6 @@ namespace GodBreakable
                             {
                                 boss.LoseHp(8);
                                 CamShake = 100;
-                            }
-
-                            if (myBrick.BrickType != "Core")
-                            {
-                                myBrick.Fall();
-                                CamShake = 30;
                             }
                         }
                     }
@@ -253,6 +259,7 @@ namespace GodBreakable
 
             Shoot newProjectile = new Shoot(GameScreen, servSprite.NewSprite(TextName), Position, Speed, Damage);
             lstShoot.Add(newProjectile);
+            newProjectile.SetPosition(new Vector2(newProjectile.Position.X - newProjectile.Width /2, Position.Y));
         }
 
         private void ProjectileManager()
@@ -291,6 +298,7 @@ namespace GodBreakable
             bossLifebar.Draw(pBatch);
             newRacket.Draw(pBatch);
             newBall.Draw(pBatch);
+            //newBtn.Draw(pBatch);
 
             foreach (var boss in lstBoss)
             {
@@ -303,7 +311,8 @@ namespace GodBreakable
                     }
                 }
                 servFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
-                servFont.Print(boss.Life + " / " + boss.MaxLife +" %"+boss.Life/100, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width/2, bossLifebar.Position.Y +20), pBatch);
+                servFont.Print(boss.Life + " / " + boss.MaxLife, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width/2, bossLifebar.Position.Y +20), pBatch);
+                // +" %"+boss.Life/100
                 //servFont.Print("IsDead: " + boss.IsDead.ToString(), "", new Vector2(GameScreen.Width / 2, 50), pBatch);
             }
 

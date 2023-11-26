@@ -73,7 +73,7 @@ namespace GodBreakable
                 {
                     if (Level[l, c] == 1)
                     {
-                        Brick myBrick = new Brick(ScreenSize, texBrick, "Normal");
+                        Brick myBrick = new Brick(ScreenSize, texBrick, "Normal", 1);
                         myBrick.SetPosition(c * texBrick.Width, l * texBrick.Height);
                         lstBrick.Add(myBrick);
                     }

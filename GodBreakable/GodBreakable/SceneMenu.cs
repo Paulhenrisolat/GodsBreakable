@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Input;
 
 namespace GodBreakable
 {
@@ -23,7 +24,6 @@ namespace GodBreakable
 
         public override void Update(GameTime gameTime)
         {
-
         }
 
         public override void Draw(SpriteBatch pBatch)

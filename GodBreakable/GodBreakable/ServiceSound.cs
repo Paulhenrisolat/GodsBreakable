@@ -39,7 +39,9 @@ namespace GodBreakable
             //Sounds
             sounds = new List<Sound> 
             {
-                new Sound("bump", game.Content.Load<SoundEffect>("sound/bump"))
+                new Sound("bump", game.Content.Load<SoundEffect>("sound/bump")),
+                new Sound("lightning", game.Content.Load<SoundEffect>("sound/lightning")),
+                new Sound("brickxplode", game.Content.Load<SoundEffect>("sound/brickxplode"))
             };
             ServiceLocator.RegisterService<IServiceSound>(this);
         }
