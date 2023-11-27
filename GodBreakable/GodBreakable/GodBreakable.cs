@@ -10,11 +10,12 @@ namespace GodBreakable
         private SpriteBatch _spriteBatch;
 
         //Scenes
-        Scene MyActualScene;
-        SceneMenu MySceneMenu;
-        SceneGameplay MySceneGameplay;
-        SceneBoss MySceneBoss;
+        //Scene MyActualScene;
+        //SceneMenu MySceneMenu;
+        //SceneGameplay MySceneGameplay;
+        //SceneBoss MySceneBoss;
 
+        SceneManager sceneManager;
         public GodBreakable()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -39,14 +40,13 @@ namespace GodBreakable
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            MySceneMenu = new SceneMenu(this);
-            MySceneGameplay = new SceneGameplay(this);
-            MySceneBoss = new SceneBoss(this);
-            //MyServiceFont = new ServiceFont(this);
+            sceneManager = new SceneManager(this);
+            sceneManager.LoadScene();
 
-            MyActualScene = MySceneMenu;
-
-            //MyServiceFont.game = this;
+            //MySceneMenu = new SceneMenu(this);
+            //MySceneGameplay = new SceneGameplay(this);
+            //MySceneBoss = new SceneBoss(this);
+            //MyActualScene = MySceneMenu;
         }
 
         protected override void Update(GameTime gameTime)
@@ -57,21 +57,21 @@ namespace GodBreakable
             // TODO: Add your update logic here
 
             //change scene
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                MyActualScene = MySceneGameplay;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                MyActualScene = MySceneBoss;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.M))
-            {
-                MyActualScene = MySceneMenu;
-            }
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
+            //    MyActualScene = MySceneGameplay;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.A))
+            //{
+            //    MyActualScene = MySceneBoss;
+            //}
+            //if (Keyboard.GetState().IsKeyDown(Keys.M))
+            //{
+            //    MyActualScene = MySceneMenu;
+            //}
 
-            MyActualScene.Update(gameTime);
-            
+            //MyActualScene.Update(gameTime);
+            sceneManager.UpdateScene(gameTime);
             base.Update(gameTime);
         }
 
@@ -82,7 +82,8 @@ namespace GodBreakable
             // TODO: Add your drawing code here
 
             //Draw scene
-            MyActualScene.Draw(_spriteBatch);
+            //MyActualScene.Draw(_spriteBatch);
+            sceneManager.DrawScene(_spriteBatch);
 
             base.Draw(gameTime);
         }

@@ -13,20 +13,21 @@ namespace GodBreakable
 {
     public class SceneBoss : Scene
     {
-        Boss newBoss;
+        private Boss newBoss;
         private List<Boss> lstBoss;
         private string SelectedBoss;
         private Rectangle GameScreen;
-        Racket newRacket;
-        Ball newBall;
+        private Racket newRacket;
+        private Ball newBall;
         bool ballStick;
-        Player player;
-        Timer timer;
-        LifeBar bossLifebar;
+        private Player player;
+        private Timer timer;
+        private LifeBar bossLifebar;
         private List<Shoot> lstShoot;
-        Game ActualGame;
+        private Game ActualGame;
         private Texture2D textPlayerUI;
-        Button newBtn;
+        private Button newBtn;
+        private Window PauseWindow;
 
         public SceneBoss(Game pGame) : base(pGame)
         {
@@ -71,6 +72,9 @@ namespace GodBreakable
             newBtn = new Button(GameScreen, servSprite.NewSprite("img/btnbg"),"MainMenu");
             newBtn.SetPosition(GameScreen.Width / 2, GameScreen.Height / 2);
 
+            //Pause
+            PauseWindow = new Window("Pause");
+
             //Boss
             lstBoss = new List<Boss>();
 
@@ -104,6 +108,11 @@ namespace GodBreakable
             BrickManager();
             bossLifebar.LifeManager(newBoss.Life);
             ProjectileManager();
+
+            if(PauseWindow.windowIsOpen == true)
+            {
+                PauseWindow.Update();
+            }
         }
 
         private void Input()
@@ -114,6 +123,11 @@ namespace GodBreakable
                 {
                     boss.LoseHp(3);
                 }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.I))
+            {
+                PauseWindow.OpenWindow();
             }
         }
 
@@ -180,6 +194,7 @@ namespace GodBreakable
             IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
 
             IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
+            PauseWindow.Update();
             foreach (var boss in lstBoss)
             {
                 for (int i = boss.ListBrick.Count - 1; i >= 0; i--)
@@ -322,7 +337,9 @@ namespace GodBreakable
             }
             
             servFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
-
+            
+            PauseWindow.Draw(pBatch);
+            
             pBatch.End();
         }
     }
