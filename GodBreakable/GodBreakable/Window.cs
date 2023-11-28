@@ -20,7 +20,6 @@ namespace GodBreakable
         private Button closeButton;
         private Button mainMenuButton;
 
-        private SceneManager sceneManager;
         public string windowName { get; set; }
         public bool windowIsOpen { get; set; }
 
@@ -43,10 +42,6 @@ namespace GodBreakable
 
         public void OpenWindow()
         {
-            //if (windowIsOpen == true)
-            //{
-            //    windowIsOpen = false;
-            //}
             if (windowIsOpen == false)
             {
                 windowIsOpen = true;

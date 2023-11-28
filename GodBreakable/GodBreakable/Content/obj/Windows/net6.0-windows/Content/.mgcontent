@@ -24,8 +24,11 @@
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/btnbg.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/closebtn.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/fondAi1.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/leftArrow.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/playbtn.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/playerUI.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/racket.png</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/rightArrow.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/window.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/music/OpenYourEyes-part1.mp3</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/music/OpenYourEyes-part2.mp3</File>
@@ -35,6 +38,9 @@
   </SourceFiles>
   <DestFiles>
     <File>Default.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

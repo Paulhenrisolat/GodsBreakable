@@ -19,6 +19,7 @@ namespace GodBreakable
         public int[,] Level { get; set; }
         public List<Brick> ListBrick { get; private set; }
         public bool CanChangeMusic { get; set; }
+        public bool isSelected { get; set; }
 
         public Boss(Game pGame, string bossName,string bossCore, float bossHp, int[,] bossLevel) 
         {
@@ -29,6 +30,7 @@ namespace GodBreakable
             MaxLife = Life;
             Level = bossLevel;
             CanChangeMusic = true;
+            isSelected = false;
 
             //Generate Boss
             ListBrick = new List<Brick>();

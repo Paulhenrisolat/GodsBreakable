@@ -94,8 +94,13 @@ namespace GodBreakable
                 {0,1,1,1,2,1,2,1,1,1,0 },
                 {0,0,1,1,2,1,2,1,1,0,0 },
             });
-
+            //newBoss.isSelected = true;
             lstBoss.Add(newBoss);
+        }
+
+        public void loadBoss()
+        {
+
         }
 
         public override void Update(GameTime gameTime)
@@ -197,72 +202,75 @@ namespace GodBreakable
             PauseWindow.Update();
             foreach (var boss in lstBoss)
             {
-                for (int i = boss.ListBrick.Count - 1; i >= 0; i--)
+                if(boss.isSelected == true)
                 {
-                    if(boss.SecondPhase == true && boss.CanChangeMusic == true)
+                    for (int i = boss.ListBrick.Count - 1; i >= 0; i--)
                     {
-                        servSound.StopMusic();
-                        servSound.PlayMusic("OpenYourEyes-part2");
-                        boss.CanChangeMusic = false;
-                    }
-                    bool colision = false;
-                    Brick myBrick = boss.ListBrick[i];
-                    myBrick.Update();
-                    //myBrick.Speed = new Vector2(1f, 0);
-                    if ( myBrick.BrickType=="Weapon" && timer.CanDo == true)
-                    {
-                        Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width/2, myBrick.Position.Y), new Vector2(0f,5f), 10);
-                        servSound.PlaySound("lightning");
-                    }
+                        if (boss.SecondPhase == true && boss.CanChangeMusic == true)
+                        {
+                            servSound.StopMusic();
+                            servSound.PlayMusic("OpenYourEyes-part2");
+                            boss.CanChangeMusic = false;
+                        }
+                        bool colision = false;
+                        Brick myBrick = boss.ListBrick[i];
+                        myBrick.Update();
+                        //myBrick.Speed = new Vector2(1f, 0);
+                        if (myBrick.BrickType == "Weapon" && timer.CanDo == true)
+                        {
+                            Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width / 2, myBrick.Position.Y), new Vector2(0f, 5f), 10);
+                            servSound.PlaySound("lightning");
+                        }
 
-                    if (myBrick.BrickIsFalling == false)
-                    {
-                        if (myBrick.CollideBox.Intersects(newBall.NextPositionX()))
+                        if (myBrick.BrickIsFalling == false)
                         {
-                            newBall.InverseSpeedX();
-                            colision = true;
+                            if (myBrick.CollideBox.Intersects(newBall.NextPositionX()))
+                            {
+                                newBall.InverseSpeedX();
+                                colision = true;
+                            }
+                            if (myBrick.CollideBox.Intersects(newBall.NextPositionY()))
+                            {
+                                newBall.InverseSpeedY();
+                                colision = true;
+                            }
+                            if (colision)
+                            {
+                                servSound.PlaySound("bump");
+                                myBrick.TakeHit();
+                                if (myBrick.BrickHP <= 0 && myBrick.BrickType != "Core")
+                                {
+                                    //myBrick.Fall();
+                                    servSound.PlaySound("brickxplode");
+                                    boss.ListBrick.Remove(myBrick);
+                                }
+                                if (myBrick.BrickType == "Weak")
+                                {
+                                    boss.LoseHp(4);
+                                }
+                                if (myBrick.BrickType == "Normal")
+                                {
+                                    boss.LoseHp(2);
+                                }
+                                if (myBrick.BrickType == "Hard")
+                                {
+                                    boss.LoseHp(1);
+                                }
+                                if (myBrick.BrickType == "Core")
+                                {
+                                    boss.LoseHp(8);
+                                    CamShake = 100;
+                                }
+                            }
                         }
-                        if (myBrick.CollideBox.Intersects(newBall.NextPositionY()))
+                        if (myBrick.BrickType == "Core" && boss.IsDead)
                         {
-                            newBall.InverseSpeedY();
-                            colision = true;
+                            myBrick.Fall();
                         }
-                        if (colision)
+                        if (myBrick.Position.Y >= ScreenSize.Height - textPlayerUI.Height / 5)
                         {
-                            servSound.PlaySound("bump");
-                            myBrick.TakeHit();
-                            if(myBrick.BrickHP<= 0 && myBrick.BrickType != "Core")
-                            {
-                                //myBrick.Fall();
-                                servSound.PlaySound("brickxplode");
-                                boss.ListBrick.Remove(myBrick);
-                            }
-                            if (myBrick.BrickType == "Weak")
-                            {
-                                boss.LoseHp(4);
-                            }
-                            if (myBrick.BrickType == "Normal")
-                            {
-                                boss.LoseHp(2);
-                            }
-                            if (myBrick.BrickType == "Hard")
-                            {
-                                boss.LoseHp(1);
-                            }
-                            if (myBrick.BrickType == "Core")
-                            {
-                                boss.LoseHp(8);
-                                CamShake = 100;
-                            }
+                            boss.ListBrick.Remove(myBrick);
                         }
-                    }
-                    if (myBrick.BrickType == "Core" && boss.IsDead)
-                    {
-                        myBrick.Fall();
-                    }
-                    if (myBrick.Position.Y >= ScreenSize.Height - textPlayerUI.Height / 5)
-                    {
-                        boss.ListBrick.Remove(myBrick);
                     }
                 }
             }
@@ -317,18 +325,19 @@ namespace GodBreakable
 
             foreach (var boss in lstBoss)
             {
-                foreach (var brick in boss.ListBrick)
+                if(boss.isSelected == true)
                 {
-                    brick.Draw(pBatch);
-                    if (brick.BrickType == "Weapon")
+                    foreach (var brick in boss.ListBrick)
                     {
-                        servFont.Print(Math.Floor(timer.Time).ToString(), "", new Vector2(brick.Position.X + brick.Width/ 2, brick.Position.Y - brick.Height), pBatch);
+                        brick.Draw(pBatch);
+                        if (brick.BrickType == "Weapon")
+                        {
+                            servFont.Print(Math.Floor(timer.Time).ToString(), "", new Vector2(brick.Position.X + brick.Width / 2, brick.Position.Y - brick.Height), pBatch);
+                        }
                     }
+                    servFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
+                    servFont.Print(boss.Life + " / " + boss.MaxLife, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width / 2, bossLifebar.Position.Y + 20), pBatch);
                 }
-                servFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
-                servFont.Print(boss.Life + " / " + boss.MaxLife, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width/2, bossLifebar.Position.Y +20), pBatch);
-                // +" %"+boss.Life/100
-                //servFont.Print("IsDead: " + boss.IsDead.ToString(), "", new Vector2(GameScreen.Width / 2, 50), pBatch);
             }
 
             foreach (var projectile in lstShoot)

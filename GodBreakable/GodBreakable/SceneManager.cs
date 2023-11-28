@@ -7,8 +7,8 @@ namespace GodBreakable
     public class SceneManager
     {
         //Scenes
-        Scene MyActualScene;
-        SceneMenu MySceneMenu;
+        public Scene MyActualScene { get; set; }
+        public SceneMenu MySceneMenu;
         SceneGameplay MySceneGameplay;
         SceneBoss MySceneBoss;
 
