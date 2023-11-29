@@ -26,34 +26,33 @@ namespace GodBreakable
         private List<Shoot> lstShoot;
         private Game ActualGame;
         private Texture2D textPlayerUI;
-        private Button newBtn;
         private Window PauseWindow;
+        private bool BossAsBeenSelected;
 
         public SceneBoss(Game pGame) : base(pGame)
         {
             //Game
             ActualGame = pGame;
+            BossAsBeenSelected = false;
 
-            //Services
-            IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
-            IServiceScreen servScreen = ServiceLocator.GetService<IServiceScreen>();
-            IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
+            //Button
+            
 
             //Music
             //servSound.PlayMusic("OpenYourEyes-part2");
 
-            GameScreen = servScreen.GetScreen();
+            GameScreen = serviceScreen.GetScreen();
 
             //Player
             player = new Player(100);
             textPlayerUI = game.Content.Load<Texture2D>("img/playerUI");
 
             //Racket
-            newRacket = new Racket(GameScreen, servSprite.NewSprite("img/racket"));
+            newRacket = new Racket(GameScreen, serviceSprite.NewSprite("img/racket"));
             newRacket.Position = new Vector2(GameScreen.Width/2 - newRacket.Width/2,GameScreen.Height - newRacket.Height - textPlayerUI.Height / 5);
 
             //ball
-            newBall = new Ball(GameScreen, servSprite.NewSprite("img/ball"));
+            newBall = new Ball(GameScreen, serviceSprite.NewSprite("img/ball"));
             newBall.SetPosition(newRacket.center - newBall.Width / 2, newRacket.Position.Y - newRacket.Height / 2 - newRacket.Height/2);
             newBall.Speed = new Vector2(6, -6);
             ballStick = true;
@@ -62,15 +61,11 @@ namespace GodBreakable
             timer = new Timer(10);
 
             //LifeBar
-            bossLifebar = new LifeBar(GameScreen, servSprite.NewSprite("img/barfull"),pGame);
+            bossLifebar = new LifeBar(GameScreen, serviceSprite.NewSprite("img/barfull"),pGame);
             bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2,10);
 
             //Shoot
             lstShoot = new List<Shoot>();
-
-            //btn
-            newBtn = new Button(GameScreen, servSprite.NewSprite("img/btnbg"),"MainMenu");
-            newBtn.SetPosition(GameScreen.Width / 2, GameScreen.Height / 2);
 
             //Pause
             PauseWindow = new Window("Pause");
@@ -78,7 +73,7 @@ namespace GodBreakable
             //Boss
             lstBoss = new List<Boss>();
 
-            newBoss = new Boss(pGame,"AB","img/brick5v2", 100f, new int[,]
+            newBoss = new Boss("AB","img/brick5v2", 100f, new int[,]
             {
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
@@ -94,7 +89,7 @@ namespace GodBreakable
                 {0,1,1,1,2,1,2,1,1,1,0 },
                 {0,0,1,1,2,1,2,1,1,0,0 },
             });
-            //newBoss.isSelected = true;
+            newBoss.isSelected = true;
             lstBoss.Add(newBoss);
         }
 
@@ -105,10 +100,9 @@ namespace GodBreakable
 
         public override void Update(GameTime gameTime)
         {
-            timer.Update(gameTime);
             Input();
+            timer.Update(gameTime);
             newRacket.Update();
-            newBtn.Update();
             BallManager();
             BrickManager();
             bossLifebar.LifeManager(newBoss.Life);
@@ -132,7 +126,8 @@ namespace GodBreakable
 
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
-                PauseWindow.OpenWindow();
+                serviceSound.PlaySound("bump");
+                PauseWindow.OpenWindow(PauseWindow.windowIsOpen);
             }
         }
 
@@ -153,13 +148,6 @@ namespace GodBreakable
             if (ballStick == false) 
             {
                 newBall.Update();
-                //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-                //{
-                //    if (ballStick)
-                //    {
-                //        ballStick = false;
-                //    }
-                //}
             }
             else
             {
@@ -196,9 +184,6 @@ namespace GodBreakable
 
         private void BrickManager()
         {
-            IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
-
-            IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
             PauseWindow.Update();
             foreach (var boss in lstBoss)
             {
@@ -208,8 +193,9 @@ namespace GodBreakable
                     {
                         if (boss.SecondPhase == true && boss.CanChangeMusic == true)
                         {
-                            servSound.StopMusic();
-                            servSound.PlayMusic("OpenYourEyes-part2");
+                            serviceSound.StopMusic();
+                            serviceSound.PlayMusic("OpenYourEyes-part2");
+                            timer = new Timer(2);
                             boss.CanChangeMusic = false;
                         }
                         bool colision = false;
@@ -219,7 +205,7 @@ namespace GodBreakable
                         if (myBrick.BrickType == "Weapon" && timer.CanDo == true)
                         {
                             Shoot("img/blastv2", new Vector2(myBrick.Position.X + myBrick.Width / 2, myBrick.Position.Y), new Vector2(0f, 5f), 10);
-                            servSound.PlaySound("lightning");
+                            serviceSound.PlaySound("lightning");
                         }
 
                         if (myBrick.BrickIsFalling == false)
@@ -236,12 +222,12 @@ namespace GodBreakable
                             }
                             if (colision)
                             {
-                                servSound.PlaySound("bump");
+                                serviceSound.PlaySound("bump");
                                 myBrick.TakeHit();
                                 if (myBrick.BrickHP <= 0 && myBrick.BrickType != "Core")
                                 {
                                     //myBrick.Fall();
-                                    servSound.PlaySound("brickxplode");
+                                    serviceSound.PlaySound("brickxplode");
                                     boss.ListBrick.Remove(myBrick);
                                 }
                                 if (myBrick.BrickType == "Weak")
@@ -278,9 +264,7 @@ namespace GodBreakable
 
         private void Shoot(string TextName, Vector2 Position, Vector2 Speed, int Damage)
         {
-            IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
-
-            Shoot newProjectile = new Shoot(GameScreen, servSprite.NewSprite(TextName), Position, Speed, Damage);
+            Shoot newProjectile = new Shoot(GameScreen, serviceSprite.NewSprite(TextName), Position, Speed, Damage);
             lstShoot.Add(newProjectile);
             newProjectile.SetPosition(new Vector2(newProjectile.Position.X - newProjectile.Width /2, Position.Y));
         }
@@ -312,7 +296,6 @@ namespace GodBreakable
 
         public override void Draw(SpriteBatch pBatch)
         {
-            IServiceFont servFont = ServiceLocator.GetService<IServiceFont>();
             base.Draw(pBatch);
             pBatch.Begin();
 
@@ -332,11 +315,11 @@ namespace GodBreakable
                         brick.Draw(pBatch);
                         if (brick.BrickType == "Weapon")
                         {
-                            servFont.Print(Math.Floor(timer.Time).ToString(), "", new Vector2(brick.Position.X + brick.Width / 2, brick.Position.Y - brick.Height), pBatch);
+                            serviceFont.Print(Math.Floor(timer.Time).ToString(), "", new Vector2(brick.Position.X + brick.Width / 2, brick.Position.Y - brick.Height), pBatch);
                         }
                     }
-                    servFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
-                    servFont.Print(boss.Life + " / " + boss.MaxLife, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width / 2, bossLifebar.Position.Y + 20), pBatch);
+                    serviceFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
+                    serviceFont.Print(boss.Life + " / " + boss.MaxLife, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width / 2, bossLifebar.Position.Y + 20), pBatch);
                 }
             }
 
@@ -344,8 +327,8 @@ namespace GodBreakable
             {
                 projectile.Draw(pBatch);
             }
-            
-            servFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
+
+            serviceFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
             
             PauseWindow.Draw(pBatch);
             

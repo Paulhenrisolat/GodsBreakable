@@ -12,8 +12,6 @@ namespace GodBreakable
 {
     public class SceneMenu : Scene
     {
-        private IServiceSprite serviceSprite;
-        private IServiceScreen serviceScreen;
         SpriteFont fontMenu;
         private Button playButton;
 
@@ -22,11 +20,8 @@ namespace GodBreakable
             fontMenu = game.Content.Load<SpriteFont>("Default");
             base.textBackground = game.Content.Load<Texture2D>("img/bgTitle");
 
-            IServiceSound servSound = ServiceLocator.GetService<IServiceSound>();
-            servSound.PlayMusic("OpenYourEyes-part1");
+            serviceSound.PlayMusic("OpenYourEyes-part1");
 
-            serviceSprite = ServiceLocator.GetService<IServiceSprite>();
-            serviceScreen = ServiceLocator.GetService<IServiceScreen>();
             playButton = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/playbtn"), "");
             playButton.SetPosition(serviceScreen.GetScreen().Width/2 - playButton.Width / 2, serviceScreen.GetScreen().Height / 2 - playButton.Height / 2);
         }
@@ -40,7 +35,8 @@ namespace GodBreakable
         {
             base.Draw(pBatch);
             pBatch.Begin();
-            pBatch.DrawString(fontMenu, "Scene Menu", new Vector2(10, 10), Color.White);
+            //pBatch.DrawString(fontMenu, "Scene Menu", new Vector2(10, 10), Color.White);
+            serviceFont.Print("Scene Menu", "", new Vector2(10, 10), pBatch);
             playButton.Draw(pBatch);
             pBatch.End();
         }

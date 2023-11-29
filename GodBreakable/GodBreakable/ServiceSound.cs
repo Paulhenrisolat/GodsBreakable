@@ -52,10 +52,10 @@ namespace GodBreakable
 
             for (int i = musics.Count - 1; i >= 0; i--)
             {
-                Music sound = musics[i];
-                if (sound.Name == musicName)
+                Music music = musics[i];
+                if (music.Name == musicName)
                 {
-                    songPlaying = sound;
+                    songPlaying = music;
                     MediaPlayer.Play(songPlaying.Audio);
                 }
             }

@@ -40,11 +40,16 @@ namespace GodBreakable
             mainMenuButton.SetPosition((windowPosition.X + textWindow.Width/2) - mainMenuButton.Width/2, windowPosition.Y + textWindow.Height/2 + mainMenuButton.Height/2);
         }
 
-        public void OpenWindow()
+        public void OpenWindow(bool windowOpen)
         {
-            if (windowIsOpen == false)
+            switch (windowOpen)
             {
-                windowIsOpen = true;
+                case true:
+                    //windowIsOpen = false; 
+                    break;
+                case false:
+                    windowIsOpen = true;
+                    break;
             }
         }
 

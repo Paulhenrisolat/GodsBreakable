@@ -14,7 +14,7 @@ namespace GodBreakable
         //SceneMenu MySceneMenu;
         //SceneGameplay MySceneGameplay;
         //SceneBoss MySceneBoss;
-
+        
         SceneManager sceneManager;
         public GodBreakable()
         {

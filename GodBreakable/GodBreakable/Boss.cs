@@ -11,8 +11,8 @@ namespace GodBreakable
     class Boss
     {
         public string Name { get; set; }
-        public string BossCore { get; set; }
-        public float Life { get; set; }
+        private string BossCore { get; set; }
+        public float Life { get; private set; }
         public float MaxLife { get; private set; }
         public bool SecondPhase { get { if (Life <= MaxLife/2) { return true; } else { return false; } } set { } }
         public bool IsDead { get { if (Life <= 0) { return true; } else { return false; } } set { } }
@@ -21,13 +21,13 @@ namespace GodBreakable
         public bool CanChangeMusic { get; set; }
         public bool isSelected { get; set; }
 
-        public Boss(Game pGame, string bossName,string bossCore, float bossHp, int[,] bossLevel) 
+        public Boss(string bossName,string bossCore, float bossHp, int[,] bossLevel) 
         {
             //Boss Property
             Name = bossName;
             BossCore = bossCore;
-            Life = bossHp;
-            MaxLife = Life;
+            MaxLife = bossHp;
+            Life = MaxLife;
             Level = bossLevel;
             CanChangeMusic = true;
             isSelected = false;

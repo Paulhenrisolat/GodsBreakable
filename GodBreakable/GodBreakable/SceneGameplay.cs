@@ -26,7 +26,6 @@ namespace GodBreakable
 
         public SceneGameplay(Game pGame) : base(pGame)
         {
-            IServiceSprite servSprite = ServiceLocator.GetService<IServiceSprite>();
             //gameActual = pGame;
 
             //Contexte.life = 5;
@@ -34,12 +33,12 @@ namespace GodBreakable
             fontMenu = game.Content.Load<SpriteFont>("Default");
 
             //raquette
-            spRaquette = new Racket(Screen, servSprite.NewSprite("img/racket"));//game.Content.Load<Texture2D>("racket"));
+            spRaquette = new Racket(Screen, serviceSprite.NewSprite("img/racket"));//game.Content.Load<Texture2D>("racket"));
             spRaquette.SetPosition(Screen.Width / 2 - spRaquette.Width / 2, Screen.Height - spRaquette.Height);
             //spRaquette.Speed = new Vector2(2,0);
 
             //ball
-            spBall = new Ball(Screen, servSprite.NewSprite("img/ball"));
+            spBall = new Ball(Screen, serviceSprite.NewSprite("img/ball"));
             spBall.SetPosition(spRaquette.Position.X + spBall.Width / 2, spRaquette.Position.Y - spBall.Width);
             spBall.Speed = new Vector2(6, -6);
             ballStick = true;
@@ -48,7 +47,7 @@ namespace GodBreakable
             //newBoss = new Boss("AB", 100);
 
             //LifeBar
-            bossLifebar = new LifeBar(Screen, servSprite.NewSprite("img/barfull"), game);
+            bossLifebar = new LifeBar(Screen, serviceSprite.NewSprite("img/barfull"), game);
             bossLifebar.SetPosition(Screen.Width / 2 - bossLifebar.Width/2, Screen.Height / 2);
 
             Level = new int[,]
@@ -66,7 +65,7 @@ namespace GodBreakable
             };
 
             lstBrick = new List<Brick>();
-            Texture2D texBrick = servSprite.NewSprite("img/brick1");
+            Texture2D texBrick = serviceSprite.NewSprite("img/brick1");
             for (int l = 0; l < Level.GetLength(0); l++)
             {
                 for (int c = 0; c < Level.GetLength(1); c++)

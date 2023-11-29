@@ -19,11 +19,11 @@ namespace GodBreakable
         protected int CamShake;
         private Random rnd;
         //Declare Services
-        private readonly ServiceScreen ServiceScreen;
-        private readonly ServiceSprite ServiceSprite;
-        private readonly ServiceInput ServiceInput = new ServiceInput();
-        private readonly ServiceFont ServiceFont;
-        public readonly ServiceSound ServiceSound;
+        public readonly ServiceScreen serviceScreen;
+        public readonly ServiceSprite serviceSprite;
+        public readonly ServiceInput serviceInput = new ServiceInput();
+        public readonly ServiceFont serviceFont;
+        public readonly ServiceSound serviceSound;
 
         public Scene(Game pGame)
         {
@@ -33,10 +33,10 @@ namespace GodBreakable
 
             rnd = new Random();
 
-            ServiceFont = new ServiceFont(game);
-            ServiceSound = new ServiceSound(game);
-            ServiceScreen = new ServiceScreen(game);
-            ServiceSprite = new ServiceSprite(game);
+            serviceFont = new ServiceFont(game);
+            serviceSound = new ServiceSound(game);
+            serviceScreen = new ServiceScreen(game);
+            serviceSprite = new ServiceSprite(game);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -57,7 +57,7 @@ namespace GodBreakable
             }
 
             pBatch.Draw(textBackground, new Vector2(ScreenSize.Width/2-textBackground.Width/2, 0), Color.White);
-            ServiceFont.Print("Music: " + ServiceSound.MusicPlaying(),"", new Vector2(20, 70), pBatch);
+            serviceFont.Print("Music: " + serviceSound.MusicPlaying(),"", new Vector2(20, 70), pBatch);
             pBatch.End();
         }
     }

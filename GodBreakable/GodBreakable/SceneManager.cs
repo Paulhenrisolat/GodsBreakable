@@ -11,12 +11,14 @@ namespace GodBreakable
         public SceneMenu MySceneMenu;
         SceneGameplay MySceneGameplay;
         SceneBoss MySceneBoss;
+        SceneBossSelector MySceneBossSelector;
 
         public SceneManager(Game pGame)
         {
             MySceneMenu = new SceneMenu(pGame);
             MySceneGameplay = new SceneGameplay(pGame);
             MySceneBoss = new SceneBoss(pGame);
+            MySceneBossSelector = new SceneBossSelector(pGame);
         }
 
         public void LoadScene() 
@@ -39,6 +41,10 @@ namespace GodBreakable
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
                 ChangeScene(MySceneMenu);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                ChangeScene(MySceneBossSelector);
             }
         }
 
