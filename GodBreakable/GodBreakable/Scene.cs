@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Media;
+using System.Net;
 
 namespace GodBreakable
 {
@@ -25,24 +26,27 @@ namespace GodBreakable
         public readonly ServiceFont serviceFont;
         public readonly ServiceSound serviceSound;
 
-        public Scene(Game pGame)
+        public string SceneName;
+        public Scene(Game pGame, string sceneName)
         {
             game = pGame;
-            ScreenSize = game.Window.ClientBounds;
-            textBackground = game.Content.Load<Texture2D>("img/fondAi1");
-
+            SceneName = sceneName;
             rnd = new Random();
 
             serviceFont = new ServiceFont(game);
             serviceSound = new ServiceSound(game);
             serviceScreen = new ServiceScreen(game);
             serviceSprite = new ServiceSprite(game);
+
+            ScreenSize = game.Window.ClientBounds;
+            textBackground = serviceSprite.NewSprite("img/fondAi1");
         }
 
         public virtual void Update(GameTime gameTime)
         {
 
         }
+
         public virtual void Draw(SpriteBatch pBatch)
         {
             if (CamShake > 0)

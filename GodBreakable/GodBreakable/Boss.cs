@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GodBreakable
 {
-    class Boss
+    public class Boss
     {
         public string Name { get; set; }
-        private string BossCore { get; set; }
+        public string BossCore { get; set; }
         public float Life { get; private set; }
         public float MaxLife { get; private set; }
         public bool SecondPhase { get { if (Life <= MaxLife/2) { return true; } else { return false; } } set { } }

@@ -34,7 +34,7 @@ namespace GodBreakable
             {
                 font = game.Content.Load<SpriteFont>("Default");
             }
-
+            
             pBatch.DrawString(font, text, PosXY, Color.White);
         }
     }

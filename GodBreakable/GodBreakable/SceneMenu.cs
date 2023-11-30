@@ -15,7 +15,7 @@ namespace GodBreakable
         SpriteFont fontMenu;
         private Button playButton;
 
-        public SceneMenu(Game pGame) : base(pGame)
+        public SceneMenu(Game pGame, string sceneName) : base(pGame, sceneName)
         {
             fontMenu = game.Content.Load<SpriteFont>("Default");
             base.textBackground = game.Content.Load<Texture2D>("img/bgTitle");

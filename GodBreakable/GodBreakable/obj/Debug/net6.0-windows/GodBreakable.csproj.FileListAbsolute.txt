@@ -68,3 +68,4 @@ A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\leftArrow.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\playbtn.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\rightArrow.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\play.xnb

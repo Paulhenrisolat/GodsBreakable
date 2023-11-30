@@ -22,9 +22,10 @@ namespace GodBreakable
             textLifeBarEmpty = game.Content.Load<Texture2D>("img/barempty");
         }
 
-        public void LifeManager(float entityLife)
+        public void LifeManager(float entityLife, float entityMaxLife)
         {
-            lifeValue = entityLife / 100;
+            lifeMax = entityMaxLife;
+            lifeValue = entityLife / lifeMax;
             Scale = new Vector2(lifeValue, 0.50f);
         }
 

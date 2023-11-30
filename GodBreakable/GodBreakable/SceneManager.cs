@@ -1,56 +1,86 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace GodBreakable
 {
     public class SceneManager
     {
         //Scenes
-        public Scene MyActualScene { get; set; }
-        public SceneMenu MySceneMenu;
-        SceneGameplay MySceneGameplay;
-        SceneBoss MySceneBoss;
-        SceneBossSelector MySceneBossSelector;
+        static private Scene MyActualScene;
+        private SceneMenu MySceneMenu;
+        private SceneGameplay MySceneGameplay;
+        static private SceneBoss MySceneBoss;
+        private SceneBossSelector MySceneBossSelector;
+
+        private static List<Scene> myScenes;
+
+        private static Game actualGame;
 
         public SceneManager(Game pGame)
         {
-            MySceneMenu = new SceneMenu(pGame);
-            MySceneGameplay = new SceneGameplay(pGame);
-            MySceneBoss = new SceneBoss(pGame);
-            MySceneBossSelector = new SceneBossSelector(pGame);
+            actualGame = pGame;
+
+            MySceneMenu = new SceneMenu(pGame, "Menu");
+            MySceneGameplay = new SceneGameplay(pGame, "Gameplay");
+            MySceneBossSelector = new SceneBossSelector(pGame, "SelectorBoss");
+            
+
+            myScenes = new List<Scene>
+            {
+                MySceneMenu, 
+                MySceneGameplay,
+                MySceneBossSelector,
+            };
+
+            ChangeScene("Menu");
         }
 
         public void LoadScene() 
         {
-            MyActualScene = MySceneMenu;
+          
         }
 
         public void UpdateScene(GameTime gameTime)
         {
+            //MyActualScene = serviceScene.SceneSelected();
             MyActualScene.Update(gameTime);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                ChangeScene(MySceneGameplay);
+                ChangeScene("Gameplay");
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                ChangeScene(MySceneBoss);
+                ChangeScene("Boss");
             }
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                ChangeScene(MySceneMenu);
+                ChangeScene("Menu");
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                ChangeScene(MySceneBossSelector);
+                ChangeScene("SelectorBoss");
             }
         }
 
-        public void ChangeScene(Scene selectedScene)
+        public static void ChangeScene(string scene)
         {
-            MyActualScene = selectedScene;
+            foreach(Scene myScene in myScenes)
+            {
+                if(myScene.SceneName == scene)
+                {
+                    MyActualScene = myScene;
+                }
+            }
+        }
+
+        public static void ChargeBoss(Boss selectedBoss)
+        {
+            MySceneBoss = new SceneBoss(actualGame, "Boss", selectedBoss);
+            myScenes.Add(MySceneBoss);
+            ChangeScene(MySceneBoss.SceneName);
         }
 
         public void DrawScene(SpriteBatch spBatch) 

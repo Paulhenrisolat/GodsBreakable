@@ -64,7 +64,7 @@ namespace GodBreakable
             }
             if(mainMenuButton.IsClicked == true)
             {
-                //sceneManager.ChangeScene();
+                SceneManager.ChangeScene("Menu");
             }
         }
 

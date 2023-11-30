@@ -29,7 +29,7 @@ namespace GodBreakable
         private Window PauseWindow;
         private bool BossAsBeenSelected;
 
-        public SceneBoss(Game pGame) : base(pGame)
+        public SceneBoss(Game pGame, string sceneName, Boss SelectedBoss) : base(pGame, sceneName)
         {
             //Game
             ActualGame = pGame;
@@ -60,10 +60,6 @@ namespace GodBreakable
             //Timer
             timer = new Timer(10);
 
-            //LifeBar
-            bossLifebar = new LifeBar(GameScreen, serviceSprite.NewSprite("img/barfull"),pGame);
-            bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2,10);
-
             //Shoot
             lstShoot = new List<Shoot>();
 
@@ -73,29 +69,13 @@ namespace GodBreakable
             //Boss
             lstBoss = new List<Boss>();
 
-            newBoss = new Boss("AB","img/brick5v2", 100f, new int[,]
-            {
-                {0,0,0,0,0,0,0,0,0,0,0 },
-                {0,0,0,0,0,0,0,0,0,0,0 },
-                {0,0,0,0,0,0,0,0,0,0,0 },
-                {0,0,1,1,1,1,1,1,1,0,0 },
-                {0,1,1,1,2,4,2,1,1,1,0 },
-                {0,1,1,1,0,0,0,1,1,1,0 },
-                {4,2,2,0,0,5,0,0,2,2,4 },
-                {0,1,1,1,0,0,0,1,1,1,0 },
-                {0,1,1,1,1,0,1,1,1,1,0 },
-                {0,1,3,1,1,1,1,1,3,1,0 },
-                {0,1,1,1,2,2,2,1,1,1,0 },
-                {0,1,1,1,2,1,2,1,1,1,0 },
-                {0,0,1,1,2,1,2,1,1,0,0 },
-            });
+            newBoss = SelectedBoss;
             newBoss.isSelected = true;
             lstBoss.Add(newBoss);
-        }
 
-        public void loadBoss()
-        {
-
+            //LifeBar
+            bossLifebar = new LifeBar(GameScreen, serviceSprite.NewSprite("img/barfull"), pGame);
+            bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2, 10);
         }
 
         public override void Update(GameTime gameTime)
@@ -105,7 +85,7 @@ namespace GodBreakable
             newRacket.Update();
             BallManager();
             BrickManager();
-            bossLifebar.LifeManager(newBoss.Life);
+            bossLifebar.LifeManager(newBoss.Life, newBoss.MaxLife);
             ProjectileManager();
 
             if(PauseWindow.windowIsOpen == true)

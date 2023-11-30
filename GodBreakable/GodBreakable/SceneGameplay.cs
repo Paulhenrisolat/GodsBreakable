@@ -24,7 +24,7 @@ namespace GodBreakable
         SpriteFont fontMenu;
         private readonly Score Score = new Score();
 
-        public SceneGameplay(Game pGame) : base(pGame)
+        public SceneGameplay(Game pGame, string sceneName) : base(pGame, sceneName)
         {
             //gameActual = pGame;
 
@@ -47,8 +47,8 @@ namespace GodBreakable
             //newBoss = new Boss("AB", 100);
 
             //LifeBar
-            bossLifebar = new LifeBar(Screen, serviceSprite.NewSprite("img/barfull"), game);
-            bossLifebar.SetPosition(Screen.Width / 2 - bossLifebar.Width/2, Screen.Height / 2);
+            //bossLifebar = new LifeBar(Screen, serviceSprite.NewSprite("img/barfull"), game);
+            //bossLifebar.SetPosition(Screen.Width / 2 - bossLifebar.Width/2, Screen.Height / 2);
 
             Level = new int[,]
             {
@@ -176,7 +176,7 @@ namespace GodBreakable
 
             spRaquette.Draw(pBatch);
             spBall.Draw(pBatch);
-            bossLifebar.Draw(pBatch);
+            //bossLifebar.Draw(pBatch);
 
             IServiceScore servScore = ServiceLocator.GetService<IServiceScore>();
             if (servScore != null)

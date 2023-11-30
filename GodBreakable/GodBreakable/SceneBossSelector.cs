@@ -14,17 +14,20 @@ namespace GodBreakable
         private List<Boss> lstBoss;
         private Button BtnSelectLeft;
         private Button BtnSelectRight;
+        private Button BtnPlay;
         private List<string> lstBossTitle;
         private string BossTitleSelected;
         private int indexBossSelected;
 
-        public SceneBossSelector(Game pGame) : base(pGame)
+        public SceneBossSelector(Game pGame, string sceneName) : base(pGame, sceneName)
         {
             //Button
             BtnSelectLeft = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/leftArrow"), "");
             BtnSelectLeft.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnSelectLeft.Width / 2, serviceScreen.GetScreen().Height / 2 - BtnSelectLeft.Height / 2);
             BtnSelectRight = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/rightArrow"), "");
             BtnSelectRight.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnSelectRight.Width / 2, serviceScreen.GetScreen().Height / 2 - BtnSelectRight.Height / 2);
+            BtnPlay = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/play"), "");
+            BtnPlay.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnPlay.Width / 2, serviceScreen.GetScreen().Height / 2 - BtnPlay.Height / 2 + 180);
 
             //Boss
             lstBoss = new List<Boss>
@@ -45,7 +48,7 @@ namespace GodBreakable
                 {0,1,1,1,2,1,2,1,1,1,0 },
                 {0,0,1,1,2,1,2,1,1,0,0 },
                 }),
-                new Boss("OVA", "img/brick5v2", 500f, new int[,]
+                new Boss("OVA", "img/brick5v2", 1000f, new int[,]
                 {
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
@@ -71,7 +74,7 @@ namespace GodBreakable
                 lstBossTitle.Add(boss.Name);
             }
 
-            indexBossSelected = 1;
+            indexBossSelected = 0;
             BossTitleSelected = lstBossTitle[indexBossSelected];
         }
 
@@ -81,7 +84,8 @@ namespace GodBreakable
             BtnSelectLeft.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnSelectLeft.Width / 2 - BossTitleSelected.Length * 20, serviceScreen.GetScreen().Height / 2 - BtnSelectLeft.Height / 2);
             BtnSelectRight.Update();
             BtnSelectRight.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnSelectRight.Width / 2 + BossTitleSelected.Length * 20, serviceScreen.GetScreen().Height / 2 - BtnSelectRight.Height / 2);
-            
+            BtnPlay.Update();
+
             if (BtnSelectRight.IsClicked && indexBossSelected < lstBossTitle.Count - 1 || Keyboard.GetState().IsKeyDown(Keys.Right) && indexBossSelected < lstBossTitle.Count - 1)
             {
                 indexBossSelected = indexBossSelected + 1;
@@ -91,10 +95,11 @@ namespace GodBreakable
             {
                 indexBossSelected = indexBossSelected - 1;
             }
-            //if (Keyboard.GetState().IsKeyDown(Keys.Left) && indexBossSelected > 0)
-            //{
-            //    indexBossSelected = indexBossSelected - 1;
-            //}
+            if (BtnPlay.IsClicked || Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                SceneManager.ChargeBoss(lstBoss[indexBossSelected]);
+            }
+
             BossTitleSelected = lstBossTitle[indexBossSelected];
         }
 
@@ -104,10 +109,12 @@ namespace GodBreakable
             pBatch.Begin();
 
             serviceFont.Print(BossTitleSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2), pBatch);
-            serviceFont.Print("Boss Selected : "+ indexBossSelected, "", new Vector2(serviceScreen.GetScreen().Width/2, serviceScreen.GetScreen().Height/2 - 50), pBatch);
+            serviceFont.Print("Boss Selected : "+ indexBossSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2 - 50), pBatch);
+            pBatch.Draw(serviceSprite.NewSprite(lstBoss[indexBossSelected].BossCore), new Vector2(serviceScreen.GetScreen().Width / 2 - 50, serviceScreen.GetScreen().Height / 2 - 160), Color.White);
 
             BtnSelectLeft.Draw(pBatch);
             BtnSelectRight.Draw(pBatch);
+            BtnPlay.Draw(pBatch);
 
             pBatch.End();
         }

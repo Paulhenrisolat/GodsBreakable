@@ -1,4 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/leftArrow.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/leftArrow.xnb","TextureProcessor","Texture2DContent",727,10085,0,1259415
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/playbtn.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/playbtn.xnb","TextureProcessor","Texture2DContent",495,7701,0,005169
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/rightArrow.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/rightArrow.xnb","TextureProcessor","Texture2DContent",707,10085,0,0015403
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/play.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/play.xnb","TextureProcessor","Texture2DContent",930,25685,0,1276784
