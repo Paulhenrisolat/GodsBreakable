@@ -22,13 +22,17 @@ namespace GodBreakable
 
             serviceSound.PlayMusic("OpenYourEyes-part1");
 
-            playButton = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/playbtn"), "");
+            playButton = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/play"), "");
             playButton.SetPosition(serviceScreen.GetScreen().Width/2 - playButton.Width / 2, serviceScreen.GetScreen().Height / 2 - playButton.Height / 2);
         }
 
         public override void Update(GameTime gameTime)
         {
             playButton.Update();
+            if(playButton.IsClicked)
+            {
+                SceneManager.ChangeScene("SelectorBoss");
+            }
         }
 
         public override void Draw(SpriteBatch pBatch)

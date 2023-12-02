@@ -26,17 +26,16 @@ namespace GodBreakable
         private List<Shoot> lstShoot;
         private Game ActualGame;
         private Texture2D textPlayerUI;
+
+        private List<Window> lstWindow;
         private Window PauseWindow;
-        private bool BossAsBeenSelected;
+        private Window WinWindow;
+        private Window LoseWindow;
 
         public SceneBoss(Game pGame, string sceneName, Boss SelectedBoss) : base(pGame, sceneName)
         {
             //Game
             ActualGame = pGame;
-            BossAsBeenSelected = false;
-
-            //Button
-            
 
             //Music
             //servSound.PlayMusic("OpenYourEyes-part2");
@@ -63,8 +62,18 @@ namespace GodBreakable
             //Shoot
             lstShoot = new List<Shoot>();
 
-            //Pause
+            //Window
             PauseWindow = new Window("Pause");
+            WinWindow = new Window("Win");
+            LoseWindow = new Window("Lose");
+
+            lstWindow = new List<Window>
+            {
+                PauseWindow,
+                WinWindow,
+                LoseWindow,
+
+            };
 
             //Boss
             lstBoss = new List<Boss>();
@@ -80,6 +89,8 @@ namespace GodBreakable
 
         public override void Update(GameTime gameTime)
         {
+            GameManager();
+
             Input();
             timer.Update(gameTime);
             newRacket.Update();
@@ -88,9 +99,12 @@ namespace GodBreakable
             bossLifebar.LifeManager(newBoss.Life, newBoss.MaxLife);
             ProjectileManager();
 
-            if(PauseWindow.windowIsOpen == true)
+            foreach (Window window in lstWindow)
             {
-                PauseWindow.Update();
+                if (window.windowIsOpen)
+                {
+                    window.Update();
+                }
             }
         }
 
@@ -274,6 +288,23 @@ namespace GodBreakable
             }
         }
 
+        private void GameManager()
+        {
+            if (player.IsDead == true)
+            {
+                LoseWindow.OpenWindow(LoseWindow.windowIsOpen);
+            }
+            foreach (var boss in lstBoss)
+            {
+                if (boss.isSelected == true)
+                {
+                    if (boss.IsDead)
+                    {
+                        WinWindow.OpenWindow(WinWindow.windowIsOpen);
+                    }
+                }
+            }
+        }
         public override void Draw(SpriteBatch pBatch)
         {
             base.Draw(pBatch);
@@ -309,9 +340,15 @@ namespace GodBreakable
             }
 
             serviceFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
-            
-            PauseWindow.Draw(pBatch);
-            
+
+            foreach (Window window in lstWindow)
+            {
+                if (window.windowIsOpen)
+                {
+                    window.Draw(pBatch);
+                }
+            }
+
             pBatch.End();
         }
     }
