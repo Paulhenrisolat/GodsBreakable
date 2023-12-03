@@ -8,12 +8,6 @@ namespace GodBreakable
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
-        //Scenes
-        //Scene MyActualScene;
-        //SceneMenu MySceneMenu;
-        //SceneGameplay MySceneGameplay;
-        //SceneBoss MySceneBoss;
         
         SceneManager sceneManager;
         public GodBreakable()
@@ -42,11 +36,6 @@ namespace GodBreakable
             // TODO: use this.Content to load your game content here
             sceneManager = new SceneManager(this);
             sceneManager.LoadScene();
-
-            //MySceneMenu = new SceneMenu(this);
-            //MySceneGameplay = new SceneGameplay(this);
-            //MySceneBoss = new SceneBoss(this);
-            //MyActualScene = MySceneMenu;
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,23 +44,8 @@ namespace GodBreakable
                 Exit();
 
             // TODO: Add your update logic here
-
-            //change scene
-            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            //{
-            //    MyActualScene = MySceneGameplay;
-            //}
-            //if (Keyboard.GetState().IsKeyDown(Keys.A))
-            //{
-            //    MyActualScene = MySceneBoss;
-            //}
-            //if (Keyboard.GetState().IsKeyDown(Keys.M))
-            //{
-            //    MyActualScene = MySceneMenu;
-            //}
-
-            //MyActualScene.Update(gameTime);
             sceneManager.UpdateScene(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -80,9 +54,6 @@ namespace GodBreakable
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
-            //Draw scene
-            //MyActualScene.Draw(_spriteBatch);
             sceneManager.DrawScene(_spriteBatch);
 
             base.Draw(gameTime);

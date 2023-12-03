@@ -13,8 +13,10 @@ namespace GodBreakable.Entity
         private int nbDot;
         private Texture2D textureDot;
         private List<RainDot> lstRainDot;
+
         public Rain(Rectangle pScreen, Texture2D pTexture, int speed) : base(pScreen, pTexture)
         {
+            Position = new Vector2(0-Width, 0);
             nbDot = 10;
             textureDot = pTexture;
             lstRainDot = new List<RainDot>();
