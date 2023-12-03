@@ -30,6 +30,10 @@ namespace GodBreakable
             {
                 font = game.Content.Load<SpriteFont>("Default");
             }
+            if (fontName == "Aldot")
+            {
+                font = game.Content.Load<SpriteFont>("Aldot");
+            }
             else
             {
                 font = game.Content.Load<SpriteFont>("Default");

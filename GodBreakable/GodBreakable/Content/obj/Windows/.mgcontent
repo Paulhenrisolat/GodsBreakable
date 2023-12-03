@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/Aldot.spritefont</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/File.spritefont</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/ball.png</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/barempty.png</File>
@@ -38,10 +39,13 @@
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/music/OpenYourEyes-part2.mp3</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/brickxplode.wav</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/bump.wav</File>
+    <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/counter.wav</File>
     <File>A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/lightning.wav</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File>Default.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

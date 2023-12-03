@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Aldot.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Aldot.spritefont
+
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -391,6 +398,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound/bump.wav
+
+#begin sound/counter.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/counter.wav
 
 #begin sound/lightning.wav
 /importer:WavImporter

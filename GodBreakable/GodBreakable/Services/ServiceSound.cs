@@ -37,11 +37,12 @@ namespace GodBreakable
             MediaPlayer.Volume = 0.1f;
 
             //Sounds
-            sounds = new List<Sound> 
+            sounds = new List<Sound>
             {
                 new Sound("bump", game.Content.Load<SoundEffect>("sound/bump")),
                 new Sound("lightning", game.Content.Load<SoundEffect>("sound/lightning")),
-                new Sound("brickxplode", game.Content.Load<SoundEffect>("sound/brickxplode"))
+                new Sound("brickxplode", game.Content.Load<SoundEffect>("sound/brickxplode")),
+                new Sound("counter", game.Content.Load<SoundEffect>("sound/counter"))
             };
             ServiceLocator.RegisterService<IServiceSound>(this);
         }

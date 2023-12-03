@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/img/raindot.png","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/img/raindot.xnb","TextureProcessor","Texture2DContent",150,4885,0,1100781
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/Aldot.spritefont","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/Aldot.xnb","FontDescriptionProcessor","SpriteFontContent",2076,21535,0,1934228
+"A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/sound/counter.wav","A:/Download/uFormationGame/GodsBreakable/GodBreakable/GodBreakable/Content/bin/Windows/sound/counter.xnb","SoundEffectProcessor","SoundEffectContent",31789,29475,0,2678064

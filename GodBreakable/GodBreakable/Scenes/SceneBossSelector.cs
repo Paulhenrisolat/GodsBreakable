@@ -110,7 +110,7 @@ namespace GodBreakable
             base.Draw(pBatch);
             pBatch.Begin();
 
-            serviceFont.Print(BossTitleSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2), pBatch);
+            serviceFont.Print(BossTitleSelected, "Aldot", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2), pBatch);
             //serviceFont.Print("Boss Selected : "+ indexBossSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2 - 50), pBatch);
             pBatch.Draw(serviceSprite.NewSprite(lstBoss[indexBossSelected].BossCore), new Vector2(serviceScreen.GetScreen().Width / 2 - 50, serviceScreen.GetScreen().Height / 2 - 160), Color.White);
 

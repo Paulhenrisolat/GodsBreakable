@@ -281,10 +281,12 @@ namespace GodBreakable
                 }
                 if (newRacket.CollideBox.Intersects(theProjectile.NextPositionY()))
                 {
+                    serviceSound.PlaySound("counter");
                     lstShoot.Remove(theProjectile);
                 }
                 if (newRacket.CollideBox.Intersects(theProjectile.NextPositionX()))
                 {
+                    serviceSound.PlaySound("counter");
                     lstShoot.Remove(theProjectile);
                 }
                 else
@@ -343,8 +345,8 @@ namespace GodBreakable
                             serviceFont.Print(Math.Floor(timer.Time).ToString(), "", new Vector2(brick.Position.X + brick.Width / 2, brick.Position.Y - brick.Height), pBatch);
                         }
                     }
-                    serviceFont.Print("Boss" + boss.Name, "Arial", new Vector2(GameScreen.Width / 2, 10), pBatch);
-                    serviceFont.Print(boss.Life + " / " + boss.MaxLife, "", new Vector2(bossLifebar.Position.X + bossLifebar.Width / 2, bossLifebar.Position.Y + 20), pBatch);
+                    serviceFont.Print(boss.Name, "Aldot", new Vector2(GameScreen.Width / 2, 10), pBatch);
+                    serviceFont.Print(boss.Life + " / " + boss.MaxLife, "Aldot", new Vector2(bossLifebar.Position.X + bossLifebar.Width / 2, bossLifebar.Position.Y + 20), pBatch);
                 }
             }
 
@@ -353,7 +355,7 @@ namespace GodBreakable
                 projectile.Draw(pBatch);
             }
 
-            serviceFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
+            serviceFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "Aldot", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
             serviceFont.Print("Raindots: " + rain.GetRain(), "", new Vector2(GameScreen.Width - 100, GameScreen.Height - 10), pBatch);
             foreach (Window window in lstWindow)
             {

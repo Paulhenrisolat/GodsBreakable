@@ -23,7 +23,6 @@ namespace GodBreakable
         //Declare Services
         public readonly ServiceScreen serviceScreen;
         public readonly ServiceSprite serviceSprite;
-        public readonly ServiceInput serviceInput = new ServiceInput();
         public readonly ServiceFont serviceFont;
         public readonly ServiceSound serviceSound;
 

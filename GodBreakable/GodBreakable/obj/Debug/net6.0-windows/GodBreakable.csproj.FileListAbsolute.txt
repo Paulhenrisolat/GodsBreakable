@@ -72,3 +72,5 @@ A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\ova.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\selector.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\raindot.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\Aldot.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\sound\counter.xnb
