@@ -19,6 +19,7 @@ namespace GodBreakable
         public Rectangle ScreenSize { get; private set; }
         protected int CamShake;
         private Random rnd;
+
         //Declare Services
         public readonly ServiceScreen serviceScreen;
         public readonly ServiceSprite serviceSprite;

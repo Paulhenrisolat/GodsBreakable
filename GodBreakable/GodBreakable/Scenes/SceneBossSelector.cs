@@ -29,6 +29,9 @@ namespace GodBreakable
             BtnPlay = new Button(serviceScreen.GetScreen(), serviceSprite.NewSprite("img/play"), "");
             BtnPlay.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnPlay.Width / 2, serviceScreen.GetScreen().Height / 2 - BtnPlay.Height / 2 + 180);
 
+            //Background
+            base.textBackground = serviceSprite.NewSprite("img/selector");
+
             //Boss
             lstBoss = new List<Boss>
             {
@@ -48,7 +51,7 @@ namespace GodBreakable
                 {0,1,1,1,2,1,2,1,1,1,0 },
                 {0,0,1,1,2,1,2,1,1,0,0 },
                 }),
-                new Boss("OVA", "img/brick5v2", 1000f, new int[,]
+                new Boss("OVA", "img/ova", 1000f, new int[,]
                 {
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
@@ -89,7 +92,6 @@ namespace GodBreakable
             if (BtnSelectRight.IsClicked && indexBossSelected < lstBossTitle.Count - 1 || Keyboard.GetState().IsKeyDown(Keys.Right) && indexBossSelected < lstBossTitle.Count - 1)
             {
                 indexBossSelected = indexBossSelected + 1;
-
             }
             if (BtnSelectLeft.IsClicked && indexBossSelected > 0 || Keyboard.GetState().IsKeyDown(Keys.Left) && indexBossSelected > 0)
             {
@@ -109,7 +111,7 @@ namespace GodBreakable
             pBatch.Begin();
 
             serviceFont.Print(BossTitleSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2), pBatch);
-            serviceFont.Print("Boss Selected : "+ indexBossSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2 - 50), pBatch);
+            //serviceFont.Print("Boss Selected : "+ indexBossSelected, "", new Vector2(serviceScreen.GetScreen().Width/2 - BossTitleSelected.Length * 5, serviceScreen.GetScreen().Height/2 - 50), pBatch);
             pBatch.Draw(serviceSprite.NewSprite(lstBoss[indexBossSelected].BossCore), new Vector2(serviceScreen.GetScreen().Width / 2 - 50, serviceScreen.GetScreen().Height / 2 - 160), Color.White);
 
             BtnSelectLeft.Draw(pBatch);

@@ -260,6 +260,18 @@
 /processorParam:TextureFormat=Color
 /build:img/leftArrow.png
 
+#begin img/ova.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/ova.png
+
 #begin img/play.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -308,6 +320,18 @@
 /processorParam:TextureFormat=Color
 /build:img/racket.png
 
+#begin img/raindot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/raindot.png
+
 #begin img/rightArrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -319,6 +343,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/rightArrow.png
+
+#begin img/selector.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/selector.png
 
 #begin img/window.png
 /importer:TextureImporter

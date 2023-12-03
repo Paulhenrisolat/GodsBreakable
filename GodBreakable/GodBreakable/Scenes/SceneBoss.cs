@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GodBreakable.Entity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -19,7 +20,7 @@ namespace GodBreakable
         private Rectangle GameScreen;
         private Racket newRacket;
         private Ball newBall;
-        bool ballStick;
+        private bool ballStick;
         private Player player;
         private Timer timer;
         private LifeBar bossLifebar;
@@ -27,10 +28,13 @@ namespace GodBreakable
         private Game ActualGame;
         private Texture2D textPlayerUI;
 
+        private KeyboardState oldstate;
         private List<Window> lstWindow;
         private Window PauseWindow;
         private Window WinWindow;
         private Window LoseWindow;
+
+        private Rain rain;
 
         public SceneBoss(Game pGame, string sceneName, Boss SelectedBoss) : base(pGame, sceneName)
         {
@@ -43,7 +47,7 @@ namespace GodBreakable
             GameScreen = serviceScreen.GetScreen();
 
             //Player
-            player = new Player(100);
+            player = new Player(1000);
             textPlayerUI = game.Content.Load<Texture2D>("img/playerUI");
 
             //Racket
@@ -85,6 +89,9 @@ namespace GodBreakable
             //LifeBar
             bossLifebar = new LifeBar(GameScreen, serviceSprite.NewSprite("img/barfull"), pGame);
             bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2, 10);
+
+            //rain
+            rain = new Rain(GameScreen, serviceSprite.NewSprite("img/raindot"), 6);
         }
 
         public override void Update(GameTime gameTime)
@@ -98,7 +105,7 @@ namespace GodBreakable
             BrickManager();
             bossLifebar.LifeManager(newBoss.Life, newBoss.MaxLife);
             ProjectileManager();
-
+            
             foreach (Window window in lstWindow)
             {
                 if (window.windowIsOpen)
@@ -118,11 +125,15 @@ namespace GodBreakable
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.I))
+            
+            KeyboardState newState = Keyboard.GetState();
+
+            if (oldstate.IsKeyUp(Keys.I) && newState.IsKeyDown(Keys.I))
             {
                 serviceSound.PlaySound("bump");
                 PauseWindow.OpenWindow(PauseWindow.windowIsOpen);
             }
+            oldstate = newState;
         }
 
         private void BallManager()
@@ -143,31 +154,26 @@ namespace GodBreakable
             {
                 newBall.Update();
             }
-            else
-            {
-                
-            }
+
             if (newRacket.CollideBox.Intersects(newBall.NextPositionY()))
             {
-                if (newBall.Position.X <= newRacket.Position.X + newRacket.CollideBox.Width / 2)
-                {
-                    Debug.WriteLine("Hit Left !");
-                }
-                if (newBall.Position.X >= newRacket.Position.X + newRacket.CollideBox.Width / 2)
-                {
-                    Debug.WriteLine("Hit Right !");
-                }
-                if (newBall.Position.X == newRacket.Position.X + newRacket.CollideBox.Width / 2)
-                {
-                    Debug.WriteLine("Hit Center !");
-                }
+                //float ballPos = newBall.Position.X + newBall.Width / 2;
+                //float racketPos = newRacket.Position.X + newRacket.Width / 2;
+                //float ballSpeed = newBall.Speed.X;
+                //float distBR = ballPos - racketPos;
 
-                Debug.WriteLine("BallX: " + newBall.Position.X + " RacketX: " + newRacket.Position.X + " RacketW: " + newRacket.Width + " TestRXW: " + (newRacket.Position.X + newRacket.Width));
+                //if (ballPos > racketPos && newBall.Speed.X < 0)
+                //{
+                //}
+
+                //newBall.Speed = new Vector2(ballSpeed, distBR);
+                //newBall.Speed = new Vector2(-ballSpeed, 10);
                 newBall.InverseSpeedY();
             }
+
+            //OutRange
             if (newRacket.CollideBox.Intersects(newBall.NextPositionX()))
             {
-                //spBall.InverseSpeedX();
                 ballStick = true;
             }
             if (newBall.Position.Y >= ScreenSize.Height - textPlayerUI.Height / 5 - newBall.Height)
@@ -292,7 +298,7 @@ namespace GodBreakable
         {
             if (player.IsDead == true)
             {
-                LoseWindow.OpenWindow(LoseWindow.windowIsOpen);
+                LoseWindow.windowIsOpen = true;
             }
             foreach (var boss in lstBoss)
             {
@@ -300,15 +306,23 @@ namespace GodBreakable
                 {
                     if (boss.IsDead)
                     {
-                        WinWindow.OpenWindow(WinWindow.windowIsOpen);
+                        WinWindow.windowIsOpen = true;
                     }
+                }
+                if(boss.SecondPhase == true)
+                {
+                    rain.Update();
                 }
             }
         }
+
         public override void Draw(SpriteBatch pBatch)
         {
             base.Draw(pBatch);
             pBatch.Begin();
+
+            rain.Draw(pBatch);
+           
 
             pBatch.Draw(textPlayerUI, new Vector2(0, GameScreen.Height - textPlayerUI.Height/5), Color.White);
 
@@ -340,7 +354,7 @@ namespace GodBreakable
             }
 
             serviceFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
-
+            serviceFont.Print("Raindots: " + rain.GetRain(), "", new Vector2(GameScreen.Width - 100, GameScreen.Height - 10), pBatch);
             foreach (Window window in lstWindow)
             {
                 if (window.windowIsOpen)

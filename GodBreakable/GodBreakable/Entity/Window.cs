@@ -45,7 +45,7 @@ namespace GodBreakable
             switch (windowOpen)
             {
                 case true:
-                    //windowIsOpen = false; 
+                    windowIsOpen = false; 
                     break;
                 case false:
                     windowIsOpen = true;
