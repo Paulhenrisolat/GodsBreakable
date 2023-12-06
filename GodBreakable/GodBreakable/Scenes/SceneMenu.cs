@@ -18,7 +18,7 @@ namespace GodBreakable
         public SceneMenu(Game pGame, string sceneName) : base(pGame, sceneName)
         {
             fontMenu = game.Content.Load<SpriteFont>("Default");
-            base.textBackground = game.Content.Load<Texture2D>("img/bgTitle");
+            base.textBackground = game.Content.Load<Texture2D>("img/bgTitleV2");
 
             serviceSound.PlayMusic("OpenYourEyes-part1");
 

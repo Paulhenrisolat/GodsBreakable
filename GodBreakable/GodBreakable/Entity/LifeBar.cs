@@ -11,9 +11,7 @@ namespace GodBreakable
 {
     public class LifeBar : Sprite
     {
-        private Texture2D textLifeBar;
         private Texture2D textLifeBarEmpty;
-        private string entityName;
         private float lifeValue;
         private float lifeMax;
 

@@ -74,3 +74,6 @@ A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\raindot.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\Aldot.xnb
 A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\sound\counter.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\bgTitleV2.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\raquetteV2.xnb
+A:\Download\uFormationGame\GodsBreakable\GodBreakable\GodBreakable\bin\Debug\net6.0-windows\Content\img\star.xnb

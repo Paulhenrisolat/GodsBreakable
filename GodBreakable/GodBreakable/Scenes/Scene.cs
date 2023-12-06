@@ -74,10 +74,10 @@ namespace GodBreakable
             }
 
             pBatch.Draw(textBackground, new Vector2(ScreenSize.Width/2-textBackground.Width/2, 0), Color.White);
-            serviceFont.Print("Debug: " + serviceDebug.DebugIsOn(), "", new Vector2(100, 10), pBatch);
-            serviceFont.Print("TestDebug: " + testDebug, "", new Vector2(100, 20), pBatch);
+            
             if (serviceDebug.DebugIsOn())
             {
+                serviceFont.Print("Debug: " + serviceDebug.DebugIsOn(), "", new Vector2(100, 10), pBatch);
                 serviceFont.Print("Music: " + serviceSound.MusicPlaying(), "", new Vector2(20, 70), pBatch);
             }
             

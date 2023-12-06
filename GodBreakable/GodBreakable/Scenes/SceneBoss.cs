@@ -16,7 +16,6 @@ namespace GodBreakable
     {
         private Boss newBoss;
         private List<Boss> lstBoss;
-        private string SelectedBoss;
         private Rectangle GameScreen;
         private Racket newRacket;
         private Ball newBall;
@@ -25,7 +24,6 @@ namespace GodBreakable
         private Timer timer;
         private LifeBar bossLifebar;
         private List<Shoot> lstShoot;
-        private Game ActualGame;
         private Texture2D textPlayerUI;
 
         private KeyboardState oldstate;
@@ -39,12 +37,6 @@ namespace GodBreakable
 
         public SceneBoss(Game pGame, string sceneName, Boss SelectedBoss) : base(pGame, sceneName)
         {
-            //Game
-            ActualGame = pGame;
-
-            //Music
-            //servSound.PlayMusic("OpenYourEyes-part2");
-
             GameScreen = serviceScreen.GetScreen();
 
             //Player
@@ -52,7 +44,7 @@ namespace GodBreakable
             textPlayerUI = game.Content.Load<Texture2D>("img/playerUI");
 
             //Racket
-            newRacket = new Racket(GameScreen, serviceSprite.NewSprite("img/racket"));
+            newRacket = new Racket(GameScreen, serviceSprite.NewSprite("img/raquetteV2"));
             newRacket.Position = new Vector2(GameScreen.Width/2 - newRacket.Width/2,GameScreen.Height - newRacket.Height - textPlayerUI.Height / 5);
 
             //ball
@@ -92,7 +84,7 @@ namespace GodBreakable
             bossLifebar.SetPosition(GameScreen.Width / 2 - bossLifebar.Width / 2, 10);
 
             //rain
-            rain = new Rain(GameScreen, serviceSprite.NewSprite("img/raindot"), 6);
+            rain = new Rain(GameScreen, serviceSprite.NewSprite("img/star"), 6);
         }
 
         public override void Update(GameTime gameTime)
@@ -160,11 +152,9 @@ namespace GodBreakable
             {
                 float ballPos = newBall.Position.X + newBall.Width / 2;
                 float racketPos = newRacket.Position.X + newRacket.Width / 2;
-                //float ballSpeed = newBall.Speed.X;
                 collideBallRacket = racketPos - ballPos;
                 float newSpeedX = MathHelper.Clamp(collideBallRacket, -6, 6); 
                 newBall.Speed = new Vector2(newBall.constSpeed + newSpeedX * -1, newBall.Speed.Y); ;
-                //newBall.Speed = new Vector2(-ballSpeed, 10);
                 newBall.InverseSpeedY();
             }
 
@@ -324,13 +314,11 @@ namespace GodBreakable
 
             rain.Draw(pBatch);
            
-
             pBatch.Draw(textPlayerUI, new Vector2(0, GameScreen.Height - textPlayerUI.Height/5), Color.White);
 
             bossLifebar.Draw(pBatch);
             newRacket.Draw(pBatch);
             newBall.Draw(pBatch);
-            //newBtn.Draw(pBatch);
 
             foreach (var boss in lstBoss)
             {
@@ -356,6 +344,7 @@ namespace GodBreakable
 
             serviceFont.Print("Player HP: " + player.PlayerHp + " / " + player.PlayerMaxHp, "Aldot", new Vector2(GameScreen.Width / 2, GameScreen.Height - 20), pBatch);
             serviceFont.Print("Raindots: " + rain.GetRain(), "", new Vector2(GameScreen.Width - 100, GameScreen.Height - 10), pBatch);
+            
             foreach (Window window in lstWindow)
             {
                 if (window.windowIsOpen)
@@ -363,8 +352,8 @@ namespace GodBreakable
                     window.Draw(pBatch);
                 }
             }
-            serviceFont.Print("Ball SpeedX: " +newBall.Speed.X, "", new Vector2(GameScreen.Width - 200, 20), pBatch); 
-            serviceFont.Print("Ball collision: " + collideBallRacket + " racketW: " + newRacket.Width / 2, "", new Vector2(GameScreen.Width - 300, 50), pBatch);
+            //serviceFont.Print("Ball SpeedX: " +newBall.Speed.X, "", new Vector2(GameScreen.Width - 200, 20), pBatch); 
+            //serviceFont.Print("Ball collision: " + collideBallRacket + " racketW: " + newRacket.Width / 2, "", new Vector2(GameScreen.Width - 300, 50), pBatch);
             pBatch.End();
         }
     }

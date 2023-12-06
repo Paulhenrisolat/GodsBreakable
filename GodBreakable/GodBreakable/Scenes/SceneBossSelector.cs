@@ -52,7 +52,7 @@ namespace GodBreakable
                 {0,1,1,1,2,1,2,1,1,1,0 },
                 {0,0,1,1,2,1,2,1,1,0,0 },
                 }),
-                new Boss("SECRET", "img/brick5v2", 100000f, new int[,]
+                new Boss("SECRET", "img/brick5v2", 1000000000000000000000000f, new int[,]
                 {
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
