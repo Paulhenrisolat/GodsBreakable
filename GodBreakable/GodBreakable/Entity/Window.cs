@@ -55,8 +55,11 @@ namespace GodBreakable
 
         public virtual void Update() 
         { 
-            closeButton.Update();
-            mainMenuButton.Update();
+            if (windowIsOpen)
+            {
+                closeButton.Update();
+                mainMenuButton.Update();
+            }
             if (closeButton.IsClicked == true)
             {
                 Debug.WriteLine("Close Window");

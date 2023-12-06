@@ -35,6 +35,7 @@ namespace GodBreakable
         private Window LoseWindow;
 
         private Rain rain;
+        private float collideBallRacket;
 
         public SceneBoss(Game pGame, string sceneName, Boss SelectedBoss) : base(pGame, sceneName)
         {
@@ -157,16 +158,12 @@ namespace GodBreakable
 
             if (newRacket.CollideBox.Intersects(newBall.NextPositionY()))
             {
-                //float ballPos = newBall.Position.X + newBall.Width / 2;
-                //float racketPos = newRacket.Position.X + newRacket.Width / 2;
+                float ballPos = newBall.Position.X + newBall.Width / 2;
+                float racketPos = newRacket.Position.X + newRacket.Width / 2;
                 //float ballSpeed = newBall.Speed.X;
-                //float distBR = ballPos - racketPos;
-
-                //if (ballPos > racketPos && newBall.Speed.X < 0)
-                //{
-                //}
-
-                //newBall.Speed = new Vector2(ballSpeed, distBR);
+                collideBallRacket = racketPos - ballPos;
+                float newSpeedX = MathHelper.Clamp(collideBallRacket, -6, 6); 
+                newBall.Speed = new Vector2(newBall.constSpeed + newSpeedX * -1, newBall.Speed.Y); ;
                 //newBall.Speed = new Vector2(-ballSpeed, 10);
                 newBall.InverseSpeedY();
             }
@@ -302,16 +299,18 @@ namespace GodBreakable
             {
                 LoseWindow.windowIsOpen = true;
             }
-            foreach (var boss in lstBoss)
+            for (int i = lstBoss.Count - 1; i >= 0; i--)
             {
+                Boss boss = lstBoss[i];
                 if (boss.isSelected == true)
                 {
                     if (boss.IsDead)
                     {
                         WinWindow.windowIsOpen = true;
+                        lstBoss.Remove(boss);
                     }
                 }
-                if(boss.SecondPhase == true)
+                if (boss.SecondPhase == true)
                 {
                     rain.Update();
                 }
@@ -364,7 +363,8 @@ namespace GodBreakable
                     window.Draw(pBatch);
                 }
             }
-
+            serviceFont.Print("Ball SpeedX: " +newBall.Speed.X, "", new Vector2(GameScreen.Width - 200, 20), pBatch); 
+            serviceFont.Print("Ball collision: " + collideBallRacket + " racketW: " + newRacket.Width / 2, "", new Vector2(GameScreen.Width - 300, 50), pBatch);
             pBatch.End();
         }
     }

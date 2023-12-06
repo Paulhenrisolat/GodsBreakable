@@ -18,6 +18,7 @@ namespace GodBreakable
         private List<string> lstBossTitle;
         private string BossTitleSelected;
         private int indexBossSelected;
+        private KeyboardState oldstate;
 
         public SceneBossSelector(Game pGame, string sceneName) : base(pGame, sceneName)
         {
@@ -41,6 +42,22 @@ namespace GodBreakable
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,0,0,0,0,0,0,0,0,0 },
                 {0,0,1,1,1,1,1,1,1,0,0 },
+                {0,1,1,1,2,4,2,1,1,1,0 },
+                {0,1,1,1,0,0,0,1,1,1,0 },
+                {4,2,2,0,0,5,0,0,2,2,4 },
+                {0,1,1,1,0,0,0,1,1,1,0 },
+                {0,1,1,1,1,0,1,1,1,1,0 },
+                {0,1,3,1,1,1,1,1,3,1,0 },
+                {0,1,1,1,2,2,2,1,1,1,0 },
+                {0,1,1,1,2,1,2,1,1,1,0 },
+                {0,0,1,1,2,1,2,1,1,0,0 },
+                }),
+                new Boss("SECRET", "img/brick5v2", 100000f, new int[,]
+                {
+                {0,0,0,0,0,0,0,0,0,0,0 },
+                {0,0,0,0,0,0,0,0,0,0,0 },
+                {0,0,0,0,0,0,0,0,0,0,0 },
+                {4,4,4,4,4,4,4,4,4,4,4 },
                 {0,1,1,1,2,4,2,1,1,1,0 },
                 {0,1,1,1,0,0,0,1,1,1,0 },
                 {4,2,2,0,0,5,0,0,2,2,4 },
@@ -89,14 +106,30 @@ namespace GodBreakable
             BtnSelectRight.SetPosition(serviceScreen.GetScreen().Width / 2 - BtnSelectRight.Width / 2 + BossTitleSelected.Length * 20, serviceScreen.GetScreen().Height / 2 - BtnSelectRight.Height / 2);
             BtnPlay.Update();
 
-            if (BtnSelectRight.IsClicked && indexBossSelected < lstBossTitle.Count - 1 || Keyboard.GetState().IsKeyDown(Keys.Right) && indexBossSelected < lstBossTitle.Count - 1)
+            KeyboardState newState = Keyboard.GetState();
+
+            if (BtnSelectRight.IsClicked || oldstate.IsKeyUp(Keys.Right) && newState.IsKeyDown(Keys.Right))
             {
                 indexBossSelected = indexBossSelected + 1;
+                if(indexBossSelected > lstBoss.Count-1) 
+                {
+                    indexBossSelected = 0;
+                }
             }
-            if (BtnSelectLeft.IsClicked && indexBossSelected > 0 || Keyboard.GetState().IsKeyDown(Keys.Left) && indexBossSelected > 0)
+            if (BtnSelectLeft.IsClicked || oldstate.IsKeyUp(Keys.Left) && newState.IsKeyDown(Keys.Left))
             {
                 indexBossSelected = indexBossSelected - 1;
+                if (indexBossSelected < 0)
+                {
+                    indexBossSelected = lstBoss.Count-1;
+                }
             }
+
+            oldstate = newState;
+            //if (BtnSelectLeft.IsClicked && indexBossSelected > 0 || Keyboard.GetState().IsKeyDown(Keys.Left) && indexBossSelected > 0)
+            //{
+            //    indexBossSelected = indexBossSelected - 1;
+            //}
             if (BtnPlay.IsClicked || Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 SceneManager.ChargeBoss(lstBoss[indexBossSelected]);

@@ -13,6 +13,7 @@ namespace GodBreakable
     {
         public string Name;
         public bool IsClicked {  get; set; }
+        private MouseState oldstate;
 
         public Button(Rectangle pScreen, Texture2D pTexture, string btnName) : base(pScreen, pTexture)
         {
@@ -30,10 +31,17 @@ namespace GodBreakable
             if (Mouse.GetState().X >= Position.X && Mouse.GetState().X <= Position.X + Width && Mouse.GetState().Y >= Position.Y && Mouse.GetState().Y <= Position.Y + Height)
             {
                 Scale = new Vector2(1.1f,1.1f);
-                if(Mouse.GetState().LeftButton == ButtonState.Pressed)
+
+                MouseState newState = Mouse.GetState();
+                if (oldstate.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
                 {
                     IsClicked = true;
                 }
+                oldstate = newState;
+                //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                //{
+                //    IsClicked = true;
+                //}
             }
             else
             {

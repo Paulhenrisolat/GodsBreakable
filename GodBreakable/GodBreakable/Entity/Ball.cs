@@ -15,11 +15,13 @@ namespace GodBreakable
         public bool isPaused { get; set; }
         public bool canChangeState { get; set; }
         public Vector2 lastSpeed { get; set; }
+        public float constSpeed { get; private set; }
 
         public Ball(Rectangle pScreen, Texture2D pTexture) : base(pScreen, pTexture)
         {
             isPaused = false;
             canChangeState = true;
+            constSpeed = Speed.X;
         }
 
         public void BallManager()

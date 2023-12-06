@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System.Net;
+using GodBreakable.Services;
+using Microsoft.Xna.Framework.Input;
 
 namespace GodBreakable
 {
@@ -19,12 +21,15 @@ namespace GodBreakable
         public Rectangle ScreenSize { get; private set; }
         protected int CamShake;
         private Random rnd;
+        private KeyboardState oldstate;
+        private bool testDebug;
 
         //Declare Services
         public readonly ServiceScreen serviceScreen;
         public readonly ServiceSprite serviceSprite;
         public readonly ServiceFont serviceFont;
         public readonly ServiceSound serviceSound;
+        public readonly ServiceDebug serviceDebug = new ServiceDebug();
 
         public string SceneName;
         public Scene(Game pGame, string sceneName)
@@ -32,6 +37,7 @@ namespace GodBreakable
             game = pGame;
             SceneName = sceneName;
             rnd = new Random();
+            testDebug = false;
 
             serviceFont = new ServiceFont(game);
             serviceSound = new ServiceSound(game);
@@ -44,7 +50,14 @@ namespace GodBreakable
 
         public virtual void Update(GameTime gameTime)
         {
+            KeyboardState newState = Keyboard.GetState();
 
+            if (oldstate.IsKeyUp(Keys.D) && newState.IsKeyDown(Keys.D))
+            {
+                testDebug = true;
+                serviceDebug.ActivateDebug();
+            }
+            oldstate = newState;
         }
 
         public virtual void Draw(SpriteBatch pBatch)
@@ -61,7 +74,13 @@ namespace GodBreakable
             }
 
             pBatch.Draw(textBackground, new Vector2(ScreenSize.Width/2-textBackground.Width/2, 0), Color.White);
-            serviceFont.Print("Music: " + serviceSound.MusicPlaying(),"", new Vector2(20, 70), pBatch);
+            serviceFont.Print("Debug: " + serviceDebug.DebugIsOn(), "", new Vector2(100, 10), pBatch);
+            serviceFont.Print("TestDebug: " + testDebug, "", new Vector2(100, 20), pBatch);
+            if (serviceDebug.DebugIsOn())
+            {
+                serviceFont.Print("Music: " + serviceSound.MusicPlaying(), "", new Vector2(20, 70), pBatch);
+            }
+            
             pBatch.End();
         }
     }
